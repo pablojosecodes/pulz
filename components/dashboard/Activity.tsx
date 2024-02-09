@@ -4,12 +4,13 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-import { DummyOverview } from "./dummyOverview"
+import { DummyOverview } from "./DummyOverview"
+
 
   
   export default function Activity() {
     return (
-        <Card className="h-full col-span-4">
+        <Card className=" col-span-4">
             <CardHeader>
                 <CardTitle>Activity</CardTitle>
             </CardHeader>

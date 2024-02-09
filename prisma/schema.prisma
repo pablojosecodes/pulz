@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model event {
+  id           String      @id @db.VarChar
+  url          String      @db.VarChar
+  type         String?     @default("view") @db.VarChar
+  country      String?     @default("undefined") @db.VarChar
+  city         String?     @default("undefined") @db.VarChar
+  timestamp    DateTime?   @default(now()) @db.Timestamp(6)
+  originatorid String?     @db.VarChar
+  originator   originator? @relation(fields: [originatorid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model location {
+  city    String    @id @db.VarChar
+  country String    @db.VarChar
+  total   Int?      @default(0)
+  first   DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model originator {
+  id        String    @id @db.VarChar
+  origin    String    @db.VarChar
+  timestamp DateTime? @default(now()) @db.Timestamp(6)
+  event     event[]
+}
+
+model url {
+  url   String    @id @db.VarChar
+  total Int?      @default(0)
+  first DateTime? @default(now()) @db.Timestamp(6)
+}

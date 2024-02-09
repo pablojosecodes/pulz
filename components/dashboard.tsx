@@ -16,6 +16,10 @@ import { PathGrid } from "./dashboard/PathGrid"
 import MainItemsColumn from "./dashboard/MainItems"
 import Activity from "./dashboard/Activity"
 import Header from "./dashboard/Header"
+import { ButtonIcon } from "@radix-ui/react-icons"
+import { Button } from "./ui/button"
+
+
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -29,6 +33,9 @@ export default function DashboardPage() {
         <Tabs defaultValue="all" className="space-y-4">
 
           <Header />
+          {/* <Button onClick={async () => await testit()}>
+            CLICK EMM
+          </Button> */}
 
 
           <TabsContent value="all" className="space-y-4">
@@ -36,21 +43,22 @@ export default function DashboardPage() {
               <div className="col-span-1 grid gap-y-2">
                 <MainItemsColumn />
               </div>
-              <div className="h-full  col-span-4">
+              <div className="  col-span-4">
                 <Activity />
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+                  <Card className="col-span-4">
+                    <CardHeader>
+                      <CardTitle>Popular paths</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pl-2">
+                      <PathGrid />
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-4">
-                <CardHeader>
-                  <CardTitle>Popular paths</CardTitle>
-                </CardHeader>
-                <CardContent className="pl-2">
-                  <PathGrid />
-                </CardContent>
-              </Card>
-            </div>
+
 
           </TabsContent>
         </Tabs>
