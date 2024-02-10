@@ -1,3 +1,5 @@
+'use client'
+
 import { Metadata } from "next"
 
 import {
@@ -36,6 +38,15 @@ export default function DashboardPage() {
           {/* <Button onClick={async () => await testit()}>
             CLICK EMM
           </Button> */}
+          <Button onClick={async () => {
+
+            const d = await fetch("/api/create-collector", {
+              method: "POST"
+            })
+            console.log(d)
+          }}>
+            CLICK ME
+          </Button>
 
 
           <TabsContent value="all" className="space-y-4">
