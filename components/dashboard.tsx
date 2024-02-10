@@ -40,7 +40,7 @@ export default function DashboardPage() {
           </Button> */}
           <Button onClick={async () => {
 
-            const d = await fetch("/api/create-collector", {
+            const d = await fetch("/api/create-originator", {
               method: "POST"
             })
             console.log(d)

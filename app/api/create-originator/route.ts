@@ -27,17 +27,19 @@ export async function POST(request: NextApiRequest) {
 
 	// console.log(request.headers)
 	// console.log(origin)
+	const originatorId = nanoid(9)
 
-	const collector = await prisma.originator.create({
+	const originator = await prisma.originator.create({
 		data: {
-			id: nanoid(9),
+			id: originatorId,
 			origin: origin,
 			timestamp: new Date(),
 		},
 	});
-	console.log(collector)
+
+	return originatorId
 
 };
 
 
-// curl "http://localhost:3000/api/create-collector"
+// curl "http://localhost:3000/api/create-originator"

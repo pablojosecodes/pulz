@@ -1,7 +1,20 @@
-import { PrismaClient } from '@prisma/client';
+
 import { nanoid } from 'nanoid';
+import { PrismaClient } from '@prisma/client';
+import FuzzySearch from 'fuzzy-search';
 
 const prisma = new PrismaClient();
+
+interface Event {
+    id: string;
+    url: string;
+    type?: string | null; // Now allows string, undefined, or null
+    country?: string | null; // Now allows string, undefined, or null
+    city?: string | null; // Now allows string, undefined, or null
+    timestamp?: Date | null; // Now allows Date, undefined, or null
+    originatorid?: string | null; // Now allows string, undefined, or null
+}
+
 
 export const createEvent = async (
     type: string,
@@ -10,18 +23,18 @@ export const createEvent = async (
     country: string = 'undefined',
     city: string = 'undefined'
 ) => {
-        // Check if the originator exists
-        const originatorExists = await prisma.originator.findUnique({
-            where: { id: originatorId },
-        });
-    
-        if (!originatorExists) {
-            // Handle the case where the originator does not exist.
-            // For example, throw an error or create a new originator.
-            throw new Error('Originator does not exist');
-        }
-    
-    
+    // Check if the originator exists
+    const originatorExists = await prisma.originator.findUnique({
+        where: { id: originatorId },
+    });
+
+    if (!originatorExists) {
+        // Handle the case where the originator does not exist.
+        // For example, throw an error or create a new originator.
+        throw new Error('Originator does not exist');
+    }
+
+
     // Create or update the URL model
     const urlModel = await prisma.url.upsert({
         where: { url: url },
@@ -50,4 +63,39 @@ export const createEvent = async (
     });
 
     return event.id;
+};
+
+
+//   // Assuming Originator is another model, you need to define it as well.
+//   interface Originator {
+//     // Define the properties of the Originator model here
+//   }
+
+
+export const getEvents = async (
+    start: Date,
+    end: Date,
+    filter: string | string[] | undefined
+): Promise<Event[]> => {
+    let events = await prisma.event.findMany({
+        where: {
+            timestamp: {
+                gte: start,
+                lte: end,
+            },
+        },
+        take: 2500,
+        orderBy: { timestamp: 'desc' },
+    });
+
+    if (filter) {
+        const searcher = new FuzzySearch(events, ['url', 'type'], {
+            caseSensitive: false,
+            sort: true,
+        });
+
+        events = searcher.search(<string>filter);
+    }
+
+    return events;
 };
