@@ -28,7 +28,9 @@ function init() {
 
     collect('init')
 }
-const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://localhost:3000";
+const baseUrl = "https://pulz.vercel.app";
 
 async function send(type = "pageview") {
     console.log(`${baseUrl}/api/collect`)

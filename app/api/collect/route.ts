@@ -2,23 +2,47 @@
 import { createEvent } from '@/models/Event';
 import { extractParamsForOriginator } from '@/models/Originators';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import NextCors from 'nextjs-cors';
+export const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+  
+  
 
 // import corsMiddleware from '@/utils/corsMiddleware';
 // import { extractParamsForCollector } from '@/models/Collector';
 
 // import { createEvent } from '@/models/Events';
 
+
+// function corsMiddleware(req: NextRequest, res: NextResponse) {
+//     // Set the necessary headers for CORS
+//     res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust this to be more restrictive if necessary
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+//     // Handle preflight requests
+//     if (req.method === 'OPTIONS') {
+//         res.status(200).end();
+//         return;
+//     }
+// }
+
 export async function GET(request: NextRequest) {
+
+
     // await corsMiddleware(req, res);
-    
+
     console.log(request)
 
     let { type, url, originatorId, country, city, error } =
         await extractParamsForOriginator(request);
     const d = await createEvent(type, url, originatorId, country, city);
 
-    return Response.json({ message: 200 })
+    return Response.json({ message: 200 }, {headers: corsHeaders})
 
 }
 

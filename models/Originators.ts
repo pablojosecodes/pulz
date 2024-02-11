@@ -4,7 +4,8 @@ import { nanoid } from 'nanoid';
 import { NextRequest } from 'next/server';
 
 export const temporaryConfig: { [key: string]: string | string[] | undefined } = {
-	APP_URL: 'http://localhost:3000',
+	// APP_URL: 'http://localhost:3000',
+	APP_URL: 'https://pulz.vercel.app',
 	CORS_ALLOWED_ORIGIN: ['http://localhost:3000', 'https://udara.io'],
 };
 
