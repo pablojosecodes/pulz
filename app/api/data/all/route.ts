@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // import { getEvents } from '@/models/Events';
 import { getUrls } from '@/models/Urls';
 import moment from 'moment';
+import { geolocation } from '@vercel/edge';
 
 import { config } from '@/lib/config';
 import { getEvents } from '@/models/Event';
@@ -26,9 +27,9 @@ async function queryData(
 
 
 const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+	"Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
 
@@ -38,6 +39,16 @@ export async function GET(
 	res: NextResponse
 ) {
 	// await corsMiddleware(req, res);
+	console.log("GET")
+
+	const { city } = geolocation(req);
+	console.log("CITY")
+	console.log(city)
+	// console.log(req.headers.get('x-forwarded-for'))
+	// console.log(req.headers.get("x-vercel-ip-country"))
+	// const ip = (req.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+
+	// console.log(ip)
 
 	const url = `${config.APP_URL}${req.url}`;
 	const _url: URL = new URL(url);
@@ -46,8 +57,7 @@ export async function GET(
 	const end = _url.searchParams.get('end');
 	const filter = _url.searchParams.get('filter');
 
-	console.log("PARAMS1")
-	console.log(_url.searchParams)
+
 
 	const params = {
 		start: start ? moment.utc(start).toDate() : defaultTimespan.start,
@@ -61,8 +71,7 @@ export async function GET(
 	// 	filter: filter,
 
 	// }
-	console.log("PARAMSZ")
-	console.log(params)
+
 
 	// {
 	// 	start: 2024-02-10T00:00:00.000Z,
@@ -80,20 +89,20 @@ export async function GET(
 	// 	end: 2024-02-10T23:59:59.000Z,
 	// 	filter: null
 	//   }
-			
+
 	// {
 	// 	start: 2024-02-10T00:00:00.000Z,
 	// 	end: 2024-02-10T23:59:59.000Z,
 	// 	filter: null
 	//   }
-	  
+
 
 	const data = await queryData(params.start, params.end, <string>params.filter);
 
 	// console.log("STARTING DATAZZZZ")
 	// console.log(data)
 	// console.log("ENDING DATAZZZZ")
-	return NextResponse.json(data,  { headers: corsHeaders })
+	return NextResponse.json(data, { headers: corsHeaders })
 
 	// res.status(200).json(data);
 }

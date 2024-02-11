@@ -33,6 +33,7 @@ const corsHeaders = {
 
 export async function GET(request: NextRequest) {
 
+    
 
     // await corsMiddleware(req, res);
 

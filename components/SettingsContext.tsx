@@ -33,7 +33,8 @@ export const timespans = {
 	week: {
 		text: '7 days',
 		start: moment().subtract(7, 'days').startOf('day'),
-		end: moment().subtract(7, 'days').endOf('week'),
+		end: moment().endOf('day'),
+
 	},
 	month: {
 		text: '30 days',
