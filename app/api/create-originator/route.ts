@@ -9,7 +9,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // import { createEvent } from '@/models/Events';
 import { nanoid } from 'nanoid';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+
 
 const { PrismaClient } = require('@prisma/client')
 
@@ -36,8 +43,9 @@ export async function POST(request: NextRequest) {
 			timestamp: new Date(),
 		},
 	});
+    return NextResponse.json({ message: 200 }, { headers: corsHeaders })
 
-	return originatorId
+
 
 };
 

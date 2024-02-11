@@ -24,6 +24,15 @@ async function queryData(
 	return { events, urls };
 }
 
+
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+
+
 export async function GET(
 	req: NextRequest,
 	res: NextResponse
@@ -84,7 +93,7 @@ export async function GET(
 	// console.log("STARTING DATAZZZZ")
 	// console.log(data)
 	// console.log("ENDING DATAZZZZ")
-	return Response.json(data)
+	return NextResponse.json(data,  { headers: corsHeaders })
 
 	// res.status(200).json(data);
 }

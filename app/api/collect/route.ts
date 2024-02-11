@@ -4,13 +4,13 @@ import { extractParamsForOriginator } from '@/models/Originators';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import NextCors from 'nextjs-cors';
-export const corsHeaders = {
+const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  };
-  
-  
+};
+
+
 
 // import corsMiddleware from '@/utils/corsMiddleware';
 // import { extractParamsForCollector } from '@/models/Collector';
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
         await extractParamsForOriginator(request);
     const d = await createEvent(type, url, originatorId, country, city);
 
-    return Response.json({ message: 200 }, {headers: corsHeaders})
+    return NextResponse.json({ message: 200 }, { headers: corsHeaders })
 
 }
 

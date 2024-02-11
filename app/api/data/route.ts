@@ -7,6 +7,13 @@ import generateStatsCollector from '@/lib/generateStatsCollector';
 import { NextRequest, NextResponse } from 'next/server';
 
 
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+
 function sendResponse(obfuscatedJs: string) {
 	const response = NextResponse.json({ body: obfuscatedJs }, { status: 200 })
 
