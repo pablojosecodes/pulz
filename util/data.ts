@@ -42,15 +42,13 @@ export const parseLocationFromRequest = (
 	req: NextRequest
 ): { city: string; country: string } => {
 	const headers = req.headers;
-    console.log(headers)
-    console.log(headers.get('x-vercel-ip-country'))
+
 
 	const decodedCountry = decodeURI(<string>headers.get('x-vercel-ip-country'))
 	const decodedCity = decodeURI(<string>headers.get('x-vercel-ip-city'))
 
 	const country = decodedCountry ?? 'undefined';
 	const city = decodedCity ?? 'undefined';
-    console.log(country)
 
 	return { country, city };
 };
@@ -59,11 +57,10 @@ export function aggregateDataByPathname(filteredEvents: DataItem[]) {
     const aggregatedData = new Map();
 
     filteredEvents.forEach((item: DataItem) => {
-        console.log(item.url)
+
         try {
             const url = new URL(item.url);
             const pathname = url.pathname;
-            console.log(url)
             const key = `${url} ${pathname}`;
 
             if (!aggregatedData.has(key)) {
@@ -73,9 +70,9 @@ export function aggregateDataByPathname(filteredEvents: DataItem[]) {
             }
 
         } catch {
-            console.log("ER")
+            console.log("Check logs")
         }
-        console.log(aggregatedData);
+
 
 
     });

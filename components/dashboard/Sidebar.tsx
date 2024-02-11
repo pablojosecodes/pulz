@@ -94,8 +94,6 @@ export default function Sidebar({ events }: { events: Event[] }) {
     const sessions = countUniqueOriginatorIDs(events)
     const cities = countUniqueCities(events)
     const types = countEventsPerType(events)
-    console.log("tyzllpes")
-    console.log(types)
 
 
     // Use useCountUp hook for animated counting
