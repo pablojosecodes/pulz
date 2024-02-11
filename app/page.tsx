@@ -19,7 +19,7 @@ export default function Home() {
 			if (settings.paused) return;
 
 			refreshData();
-		}, 5000);
+		}, 500000000);
 		return () => clearInterval(intervalId);
 	}, [settings.paused]);
 

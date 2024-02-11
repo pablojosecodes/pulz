@@ -4,6 +4,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { useEffect, useState } from "react";
+import { useCountUp } from 'use-count-up';
+
 
 type Event = {
     originatorid: string;
@@ -12,13 +15,13 @@ type Event = {
 };
 
 export default function MainItemsColumn({ events }: { events: Event[] }) {
+    const [sessionCount, setSessionCount] = useState(0);
 
     function countUniqueOriginatorIDs(events: Event[]): number {
         const uniqueIDs: Set<string> = new Set(events.map(event => event.originatorid));
-        console.log("uniqueIDsuniqueIDsuniqueIDsuniqueIDs")
-        console.log(uniqueIDs)
         return uniqueIDs.size;
     }
+
 
     function countUniqueCities(events: Event[]): number {
         const uniqueCities: Set<string> = new Set(events.map(event => event.city));
@@ -34,9 +37,28 @@ export default function MainItemsColumn({ events }: { events: Event[] }) {
         }, {});
     }
 
-    const sessions = countUniqueOriginatorIDs(events)
-    const cities = countUniqueCities(events)
-    const types = countEventsPerType(events)
+
+        // Update sessionCount when events change
+        useEffect(() => {
+            setSessionCount(countUniqueOriginatorIDs(events));
+        }, [events]);
+    
+        const sessions = countUniqueOriginatorIDs(events)
+        const cities = countUniqueCities(events)
+        const types = countEventsPerType(events)
+    
+        // Use useCountUp hook for animated counting
+        const { value: animatedSessions } = useCountUp({
+            isCounting: true,
+            end: sessionCount,
+            duration: 3.2, // Duration of the count up animation in seconds
+        });
+    
+    
+
+
+    
+
 
     return (
         <>
@@ -59,7 +81,7 @@ export default function MainItemsColumn({ events }: { events: Event[] }) {
                     </svg>
                 </CardHeader>
                 <CardContent >
-                    <div className="text-2xl font-bold">{sessions}</div>
+                    <div className="text-2xl font-bold">{animatedSessions}</div>
                 </CardContent>
             </Card>
             <Card>
