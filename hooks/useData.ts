@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { fetcher } from '@/lib/fetcher';
+import { fetcher } from '@/util/fetch';
 import { Timespan } from '@/components/SettingsContext';
 
 

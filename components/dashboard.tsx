@@ -2,6 +2,15 @@
 
 import { Metadata } from "next"
 
+
+// Settings
+import { useSettings, timespans } from "@/components/SettingsContext";
+
+// Components
+import { PathGrid } from "@/components/dashboard/PathGrid"
+import MainItemsColumn from "@/components/dashboard/MainItems"
+import Activity from "@/components/dashboard/Activity"
+import Header from "@/components/dashboard/Header"
 import {
   Card,
   CardContent,
@@ -12,16 +21,8 @@ import {
   Tabs,
   TabsContent,
 } from "@/components/ui/tabs"
-
-import { PathGrid } from "./dashboard/PathGrid"
-import MainItemsColumn from "./dashboard/MainItems"
-import Activity from "./dashboard/Activity"
-import Header from "./dashboard/Header"
-import { ButtonIcon } from "@radix-ui/react-icons"
-import { Button } from "./ui/button"
-import { DataItem, DataTable } from "./DataTable"
-import { compileFunction } from "vm"
-import { useSettings, timespans, Timespan } from './SettingsContext';
+import { Button } from "@/components/ui/button"
+import { DataItem, DataTable } from "@/components/DataTable"
 
 
 
@@ -79,25 +80,20 @@ export default function DashboardPage({ data, filteredEvents }: { data: any, fil
 
 
   return (
-    <div className="hidden  w-full flex-col md:flex">
+    <div className="w-full flex-col flex">
       <div className="flex-1 space-y-4 p-8 pt-6">
         <Tabs defaultValue="all" className="space-y-4">
           <Header />
-          <Button onClick={async () => {
-onChangeTimespan("week")          }}>
-            CLICK ME
-          </Button>
-
 
           <TabsContent value="all" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-              <div className="col-span-1 grid gap-y-2">
-                <MainItemsColumn />
+            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-5">
+              <div className="col-span-1 gap-x-2">
+                <MainItemsColumn events={filteredEvents} />
               </div>
-              <div className="  col-span-4">
-                <Activity events={filteredEvents}/>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
-                  <Card className="col-span-4">
+              <div className=" gap-y-2 grid col-span-4">
+                <Activity events={filteredEvents} />
+                <div className="flex  gap-x-2 ƒflex-wrap md:flex-nowrap">
+                  <Card className="flex-1">
                     <CardHeader>
                       <CardTitle>Popular paths</CardTitle>
                     </CardHeader>
@@ -105,7 +101,7 @@ onChangeTimespan("week")          }}>
                       <PathGrid data={aggregateDataByPathname(filteredEvents)} />
                     </CardContent>
                   </Card>
-                  <Card className="col-span-4">
+                  <Card className="flex-1">
                     <CardHeader>
                       <CardTitle>Recent Logs</CardTitle>
                     </CardHeader>

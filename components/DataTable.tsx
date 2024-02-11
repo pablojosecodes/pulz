@@ -45,59 +45,95 @@ import {
 export type DataItem = {
     id: string;
     url: string;
+    pathname: string;
     type: string;
     country?: string;
     city?: string;
     timestamp: string;
     originatorid: string;
-  };
-  
-  export const columns: ColumnDef<DataItem>[] = [
+};
+
+function formatRelativeTime(dateString: string): string {
+    const now = new Date();
+    const date = new Date(dateString);
+
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+
+    const timeString = formatter.format(date);
+
+    const diff = now.getTime() - date.getTime();
+    const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
+    const daysDiff = Math.floor(diff / oneDay);
+
+    if (daysDiff === 0) {
+        return `Today, ${timeString}`;
+    } else if (daysDiff === 1) {
+        return `Yesterday, ${timeString}`;
+    } else {
+        return `${daysDiff} days ago, ${timeString}`;
+    }
+}
+
+
+
+export const columns: ColumnDef<DataItem>[] = [
     {
-      accessorKey: "id",
-      header: "ID",
-      cell: ({ row }) => <div>{row.getValue("id")}</div>,
+        accessorKey: "url",
+        header: "Domain",
+        cell: ({ row }) => <div>{
+            (row.getValue("url") as string) &&
+            (row.getValue("url") as string).split("://").length > 1 &&
+
+            (row.getValue("url") as string).split("://")[1].slice(0, -1)}</div>,
     },
     {
-      accessorKey: "url",
-      header: "URL",
-      cell: ({ row }) => <div>{row.getValue("url")}</div>,
+        accessorKey: "pathname",
+        header: "pathname",
+        cell: ({ row }) => <div>{
+            (row.getValue("url") as string) &&
+            (row.getValue("url") as string).split("://").length > 1 &&
+
+            (row.getValue("url") as string).split("://")[1].split("/").length > 1 ?  (row.getValue("url") as string).split("://")[1].split("/")[1] : (row.getValue("url") as string).split("://")[1].split("/")[0] + "/"}</div>,
     },
     {
-      accessorKey: "type",
-      header: "Type",
-      cell: ({ row }) => <div>{row.getValue("type")}</div>,
+        accessorKey: "type",
+        header: "Type",
+        cell: ({ row }) => <div>{row.getValue("type")}</div>,
     },
     {
-      accessorKey: "country",
-      header: "Country",
-      cell: ({ row }) => <div>{row.getValue("country")}</div>,
+        accessorKey: "country",
+        header: "Country",
+        cell: ({ row }) => <div>{row.getValue("country")}</div>,
     },
     {
-      accessorKey: "city",
-      header: "City",
-      cell: ({ row }) => <div>{row.getValue("city")}</div>,
+        accessorKey: "city",
+        header: "City",
+        cell: ({ row }) => <div>{row.getValue("city")}</div>,
     },
     {
-      accessorKey: "timestamp",
-      header: "Timestamp",
-      cell: ({ row }) => <div>{row.getValue("timestamp")}</div>,
+        accessorKey: "timestamp",
+        header: "Timestamp",
+        cell: ({ row }) => <div>{formatRelativeTime(row.getValue("timestamp"))}</div>,
     },
     {
-      accessorKey: "originatorid",
-      header: "Originator ID",
-      cell: ({ row }) => <div>{row.getValue("originatorid")}</div>,
+        accessorKey: "Session ID",
+        header: "Session ID",
+        cell: ({ row }) => <div>{row.getValue("originatorid")}</div>,
     },
     // ... (any other columns you need)
-  ];
+];
 
-  
+
 type DataTableProps = {
     data: DataItem[];
-  };
-  
-  export function DataTable({ data }: DataTableProps) {
-      const [sorting, setSorting] = React.useState<SortingState>([])
+};
+
+export function DataTable({ data }: DataTableProps) {
+    const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
@@ -105,7 +141,7 @@ type DataTableProps = {
         React.useState<VisibilityState>({})
 
 
-        
+
     const table = useReactTable({
         data,
         columns,
@@ -213,27 +249,8 @@ type DataTableProps = {
                     </TableBody>
                 </Table>
             </div>
-            {/* <div className="flex items-center justify-end space-x-2 py-4">
 
-                <div className="space-x-2">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                    </Button>
-                </div>
-            </div> */}
+
         </div>
     )
 }

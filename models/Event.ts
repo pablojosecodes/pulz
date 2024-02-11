@@ -2,19 +2,9 @@
 import { nanoid } from 'nanoid';
 import { PrismaClient } from '@prisma/client';
 import FuzzySearch from 'fuzzy-search';
+import { Event } from '@/util/types';
 
 const prisma = new PrismaClient();
-
-interface Event {
-    id: string;
-    url: string;
-    type?: string | null; // Now allows string, undefined, or null
-    country?: string | null; // Now allows string, undefined, or null
-    city?: string | null; // Now allows string, undefined, or null
-    timestamp?: Date | null; // Now allows Date, undefined, or null
-    originatorid?: string | null; // Now allows string, undefined, or null
-}
-
 
 export const createEvent = async (
     type: string,
@@ -54,7 +44,7 @@ export const createEvent = async (
         data: {
             id: nanoid(9),
             url: url,
-            type: type || 'view',  // Using default value 'view' if type is not provided
+            type: type || 'view',  
             country: country,
             city: city,
             timestamp: new Date(),
@@ -66,10 +56,6 @@ export const createEvent = async (
 };
 
 
-//   // Assuming Originator is another model, you need to define it as well.
-//   interface Originator {
-//     // Define the properties of the Originator model here
-//   }
 
 
 export const getEvents = async (
@@ -100,7 +86,3 @@ export const getEvents = async (
     return events;
 };
 
-// SELECT *
-// FROM event
-// ORDER BY timestamp DESC
-// LIMIT 10;

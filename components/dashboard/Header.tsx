@@ -23,25 +23,22 @@ import { Button } from "../ui/button"
         <div className="flex justify-between">
             <TabsList className="relative">
                 <TabsTrigger value="all">
-                    All
+                    Light
                 </TabsTrigger>
                 <TabsTrigger value="Home">
-                    Home
+                    Dark
                 </TabsTrigger>
                 <TabsTrigger value="Reference">
-                    Reference
+                    Hacker News
                 </TabsTrigger>
                 <TabsTrigger value="notifications">
-                    Notifications
+                    Dark v2
                 </TabsTrigger>
-
-                <QuestionMarkIcon className="text-[#64748B] cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-sm mx-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50   data-[state=active]:shadow-sm" />
-
             </TabsList>
 
             <div className="flex items-center space-x-2">
 
-                <ThemeButton />
+
                 <Select>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue defaultValue="Weekly" placeholder="Weekly" />
@@ -55,7 +52,7 @@ import { Button } from "../ui/button"
                         </SelectGroup>
                     </SelectContent>
                 </Select>
-                <Button>Download</Button>
+
             </div>
         </div>
     )

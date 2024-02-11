@@ -5,13 +5,45 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-export default function MainItemsColumn() {
+type Event = {
+    originatorid: string;
+    city: string;
+    type: string;
+};
+
+export default function MainItemsColumn({ events }: { events: Event[] }) {
+
+    function countUniqueOriginatorIDs(events: Event[]): number {
+        const uniqueIDs: Set<string> = new Set(events.map(event => event.originatorid));
+        console.log("uniqueIDsuniqueIDsuniqueIDsuniqueIDs")
+        console.log(uniqueIDs)
+        return uniqueIDs.size;
+    }
+
+    function countUniqueCities(events: Event[]): number {
+        const uniqueCities: Set<string> = new Set(events.map(event => event.city));
+        return uniqueCities.size;
+    }
+
+
+    function countEventsPerType(events: Event[]): { [key: string]: number } {
+        return events.reduce((acc: { [key: string]: number }, event: Event) => {
+            const { type } = event; // Destructure for clarity
+            acc[type] = (acc[type] || 0) + 1; // Increment event type count
+            return acc;
+        }, {});
+    }
+
+    const sessions = countUniqueOriginatorIDs(events)
+    const cities = countUniqueCities(events)
+    const types = countEventsPerType(events)
+
     return (
         <>
-            <Card>
+            <Card className="h-24">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                        Unique Users
+                        Unique Sessions
                     </CardTitle>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +58,8 @@ export default function MainItemsColumn() {
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
                 </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">300</div>
+                <CardContent >
+                    <div className="text-2xl font-bold">{sessions}</div>
                 </CardContent>
             </Card>
             <Card>
@@ -51,56 +83,38 @@ export default function MainItemsColumn() {
                     </svg>
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">10</div>
+                    <div className="text-2xl font-bold">{events.length}</div>
 
                 </CardContent>
             </Card>
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">External Link</CardTitle>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="h-4 w-4 text-muted-foreground"
-                    >
-                        <rect width="20" height="14" x="2" y="5" rx="2" />
-                        <path d="M2 10h20" />
-                    </svg>
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">1</div>
+            {Object.keys(types).map((key, ind) => {
+                return (
+                    <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium">{key}</CardTitle>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                className="h-4 w-4 text-muted-foreground"
+                            >
+                                <rect width="20" height="14" x="2" y="5" rx="2" />
+                                <path d="M2 10h20" />
+                            </svg>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">{types[key]}</div>
 
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
-                        Internal Link
-                    </CardTitle>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="h-4 w-4 text-muted-foreground"
-                    >
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                    </svg>
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">100</div>
+                        </CardContent>
+                    </Card>
+                )
+            })}
 
-                </CardContent>
-            </Card>
-
+           
         </>
     )
 
