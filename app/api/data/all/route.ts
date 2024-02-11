@@ -1,8 +1,9 @@
 import moment from 'moment';
 import { config } from '@/util/config';
 import { NextRequest, NextResponse } from 'next/server';
-import { corsHeaders } from '@/util/types';
-import { queryData } from '@/util/fetch';
+import { corsHeaders } from '@/util/typical/types';
+import { queryData } from '@/util/data';
+
 
 const defaultTimespan = {
 	start: moment().subtract(100, 'hours').toDate(),

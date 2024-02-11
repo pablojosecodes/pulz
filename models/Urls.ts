@@ -1,9 +1,7 @@
-import { nanoid } from 'nanoid';
 import { PrismaClient } from '@prisma/client';
-import { Url } from '@/util/types';
+import { Url } from '@/util/typical/types';
 
 const prisma = new PrismaClient();
-
 
 export const getUrls = async (
 	start: Date,
@@ -14,6 +12,6 @@ export const getUrls = async (
 		take: 50,
 		orderBy: { first: 'desc' },
 	});
-
+	
 	return urls;
 };

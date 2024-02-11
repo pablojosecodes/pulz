@@ -1,9 +1,10 @@
-import type { NextApiRequest } from 'next';
-
+import { PrismaClient } from '@prisma/client';
 import { nanoid } from 'nanoid';
 import { NextRequest } from 'next/server';
-import { parseLocationFromRequest } from '@/util/requestHandling';
+import { parseLocationFromRequest } from '@/util/data';
 
+
+const prisma = new PrismaClient();
 
 
 export const createOriginator = async (origin: string) => {

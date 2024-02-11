@@ -2,7 +2,7 @@
 import { nanoid } from 'nanoid';
 import { PrismaClient } from '@prisma/client';
 import FuzzySearch from 'fuzzy-search';
-import { Event } from '@/util/types';
+import { Event } from '@/util/typical/types';
 
 const prisma = new PrismaClient();
 
@@ -54,8 +54,6 @@ export const createEvent = async (
 
     return event.id;
 };
-
-
 
 
 export const getEvents = async (

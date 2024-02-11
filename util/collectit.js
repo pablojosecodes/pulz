@@ -1,7 +1,7 @@
 
 const origin = 'default'
 const originatorId = await createOriginator(origin);
-console.log("ORRRIG in " + originatorId);
+
 
 function init() {
     document.addEventListener('click', function (event) {
@@ -34,7 +34,7 @@ async function send(type = "pageview") {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            // console.log("📼", data)
+            console.log("📼", data)
         })
         .catch(rejected => {
             console.log("📼", "failed to collect")

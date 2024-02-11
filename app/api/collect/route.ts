@@ -1,6 +1,6 @@
 import { createEvent } from '@/models/Event';
 import { paramsForOriginator } from '@/models/Originators';
-import { corsHeaders } from '@/util/types';
+import { corsHeaders } from '@/util/typical/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 

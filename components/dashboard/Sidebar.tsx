@@ -5,15 +5,10 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { useAnimatedCount } from "@/hooks/useAnimatedCount";
+import { Event } from "@/util/typical/types";
 import { useEffect, useState } from "react";
 import { useCountUp } from 'use-count-up';
 
-
-type Event = {
-    originatorid: string;
-    city: string;
-    type: string;
-};
 
 
 const TypeCard = ({ type, count }: { type: string, count: number }) => {
@@ -21,7 +16,6 @@ const TypeCard = ({ type, count }: { type: string, count: number }) => {
 
     return (
         <>
-
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" >
                     <CardTitle className="text-sm font-medium" > {type} </CardTitle>
@@ -52,24 +46,34 @@ const TypeCard = ({ type, count }: { type: string, count: number }) => {
 
 
 
-export default function MainItemsColumn({ events }: { events: Event[] }) {
+export default function Sidebar({ events }: { events: Event[] }) {
 
     function countUniqueOriginatorIDs(events: Event[]): number {
-        const uniqueIDs: Set<string> = new Set(events.map(event => event.originatorid));
+        const uniqueIDs: Set<string> = new Set()
+        events.forEach(event => {
+            if (event.originatorid) {
+                uniqueIDs.add(event.originatorid);
+            }
+        });
         return uniqueIDs.size;
     }
 
-
     function countUniqueCities(events: Event[]): number {
-        const uniqueCities: Set<string> = new Set(events.map(event => event.city));
+        const uniqueCities: Set<string> = new Set();
+        events.forEach(event => {
+            if (event.city) {
+                uniqueCities.add(event.city);
+            }
+        });
         return uniqueCities.size;
     }
-
 
     function countEventsPerType(events: Event[]): { [key: string]: number } {
         return events.reduce((acc: { [key: string]: number }, event: Event) => {
             const { type } = event; // Destructure for clarity
-            acc[type] = (acc[type] || 0) + 1; // Increment event type count
+            if (type) {
+                acc[type] = (acc[type] || 0) + 1; // Increment event type count
+            }
             return acc;
         }, {});
     }
@@ -116,8 +120,6 @@ export default function MainItemsColumn({ events }: { events: Event[] }) {
         end: count,
         duration: 3.2, // Duration of the count up animation in seconds
     });
-
-
 
 
 
@@ -197,18 +199,12 @@ export default function MainItemsColumn({ events }: { events: Event[] }) {
                 </CardContent>
             </Card>
 
-
-
             {Object.keys(types).map((type, ind) => {
                 return (
-                
-                    <TypeCard  key={`${type}-${types[type]}`}  type={type} count={types[type]} />
+
+                    <TypeCard key={`${type}-${types[type]}`} type={type} count={types[type]} />
                 )
-
-
             })}
-
-
         </>
     )
 

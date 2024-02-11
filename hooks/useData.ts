@@ -1,6 +1,7 @@
 import useSWR from 'swr';
-import { fetcher } from '@/util/fetch';
-import { Timespan } from '@/components/SettingsContext';
+
+import { Timespan } from '@/util/SettingsContext';
+import { fetcher } from '@/util/data';
 
 
 const useData = (timespan: Timespan, filter: undefined | string) => {

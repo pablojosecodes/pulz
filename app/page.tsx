@@ -1,15 +1,19 @@
 'use client'
-import { useSettings } from "@/components/SettingsContext";
-import DashboardPage from "@/components/dashboard";
+import { useSettings } from "@/util/SettingsContext";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
 import { useEffect, useMemo } from "react";
+import Dashboard from "@/components/Dashboard";
+
 
 export default function Home() {
-  const { settings } = useSettings();
-// 
+
+
+	// Settings and data
+	const { settings } = useSettings();
 	const { data, mutate } = useData(settings.timespan, '');
 
+	// Updating data
 	const refreshData = async () => {
 		mutate();
 	};
@@ -23,7 +27,8 @@ export default function Home() {
 		return () => clearInterval(intervalId);
 	}, [settings.paused]);
 
-  let { events = [], urls = [] } = data ?? {};
+	// Data -> Events
+	let { events = [], urls = [] } = data ?? {};
 
 	const filteredEvents = useMemo(() => {
 		if (settings.filter && events) {
@@ -36,7 +41,8 @@ export default function Home() {
 		return events;
 	}, [settings.filter, events]);
 
-  return (
-    <DashboardPage filteredEvents={filteredEvents} data={data} />
-  );
+	// The page
+	return (
+		<Dashboard filteredEvents={filteredEvents} />
+	);
 }

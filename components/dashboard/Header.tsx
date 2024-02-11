@@ -15,7 +15,7 @@ import {
     TabsTrigger,
   } from "@/components/ui/tabs"
 import { QuestionMarkIcon } from "@radix-ui/react-icons"
-import ThemeButton from "../ThemeButton"
+import ThemeButton from "../theme/ThemeButton"
 import { Button } from "../ui/button"
   
   export default function Header() {
@@ -37,8 +37,6 @@ import { Button } from "../ui/button"
             </TabsList>
 
             <div className="flex items-center space-x-2">
-
-
                 <Select>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue defaultValue="Weekly" placeholder="Weekly" />

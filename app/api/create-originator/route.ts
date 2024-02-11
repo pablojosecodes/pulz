@@ -1,8 +1,6 @@
-import { corsHeaders } from '@/util/types';
+import { corsHeaders } from '@/util/typical/types';
 import { nanoid } from 'nanoid';
 import { NextRequest, NextResponse } from 'next/server';
-
-
 
 
 const { PrismaClient } = require('@prisma/client')

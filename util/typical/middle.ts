@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Cors from 'cors';
-import { config } from "./config";
+import { config } from "../config";
 
 export const defaultCors = Cors({
 	methods: ['OPTIONS', 'GET'],

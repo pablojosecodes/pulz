@@ -3,7 +3,6 @@ import generateStatsCollector from '@/util/generateStatsCollector';
 import { NextRequest, NextResponse } from 'next/server';
 
 
-
 function sendResponse(obfuscatedJs: string) {
 	const response = NextResponse.json({ body: obfuscatedJs }, { status: 200 })
 	response.headers.set('Content-Type', 'application/javascript');

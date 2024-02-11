@@ -39,29 +39,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-
-
-export type DataItem = {
-    id: string;
-    type: string;
-    pathname: string;
-    count: number; // New field for event count
-    // ... other fields if necessary
-};
+import { DataItem } from "@/util/typical/types"
 
 
 
-// export type DataItem = {
-//     id: string;
-//     url: string;
-//     type: string;
-//     country?: string;
-//     city?: string;
-//     timestamp: string;
-//     originatorid: string;
-//   };
-  
-  export const columns: ColumnDef<DataItem>[] = [
+export const columns: ColumnDef<DataItem>[] = [
     {
         accessorKey: "pathname",
         header: "Pathname",
@@ -73,19 +55,19 @@ export type DataItem = {
         cell: ({ row }) => <div>{row.getValue("count")}</div>,
     },
     {
-      accessorKey: "url",
-      header: "URL",
-      cell: ({ row }) => <div>{row.getValue("url")}</div>,
+        accessorKey: "url",
+        header: "URL",
+        cell: ({ row }) => <div>{row.getValue("url")}</div>,
     },
-  ];
+];
 
-  
-type PathGridProps = {
+
+type PathProps = {
     data: DataItem[];
-  };
-  
-  export function PathGrid({ data }: PathGridProps) {
-      const [sorting, setSorting] = React.useState<SortingState>([])
+};
+
+export function Paths({ data }: PathProps) {
+    const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
@@ -93,7 +75,7 @@ type PathGridProps = {
         React.useState<VisibilityState>({})
 
 
-        
+
     const table = useReactTable({
         data,
         columns,
@@ -201,27 +183,6 @@ type PathGridProps = {
                     </TableBody>
                 </Table>
             </div>
-            {/* <div className="flex items-center justify-end space-x-2 py-4">
-
-                <div className="space-x-2">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                    </Button>
-                </div>
-            </div> */}
         </div>
     )
 }
