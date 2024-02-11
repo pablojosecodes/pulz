@@ -34,6 +34,7 @@ const useData = (timespan: Timespan, filter: undefined | string) => {
 		{ keepPreviousData: true }
 	);
 
+
 	return { data, error, isLoading, mutate };
 };
 

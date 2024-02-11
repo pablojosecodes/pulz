@@ -2,7 +2,7 @@
 
 // const origin = 'default'
 // const originatorId = await createOriginator(origin);
-const originatorId = 'dummy-id1'
+const originatorId = 'dummy-id'
 
 function init() {
     document.addEventListener('click', function (event) {

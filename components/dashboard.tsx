@@ -13,13 +13,13 @@ import {
   TabsContent,
 } from "@/components/ui/tabs"
 
-
 import { PathGrid } from "./dashboard/PathGrid"
 import MainItemsColumn from "./dashboard/MainItems"
 import Activity from "./dashboard/Activity"
 import Header from "./dashboard/Header"
 import { ButtonIcon } from "@radix-ui/react-icons"
 import { Button } from "./ui/button"
+import { DataTable } from "./DataTable"
 
 
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description: "Example dashboard app built using the components.",
 }
 
-export default function DashboardPage() {
+export default function DashboardPage({ data, filteredEvents }: { data: any, filteredEvents: any }) {
   return (
     <div className="hidden  w-full flex-col md:flex">
       <div className="flex-1 space-y-4 p-8 pt-6">
@@ -43,7 +43,8 @@ export default function DashboardPage() {
             const d = await fetch("/api/create-originator", {
               method: "POST"
             })
-            console.log(d)
+            // console.log(d)
+            console.log(filteredEvents)
           }}>
             CLICK ME
           </Button>
@@ -65,7 +66,17 @@ export default function DashboardPage() {
                       <PathGrid />
                     </CardContent>
                   </Card>
+                  <Card className="col-span-4">
+                    <CardHeader>
+                      <CardTitle>Popular paths</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pl-2">
+                      <DataTable data={filteredEvents} />
+                    </CardContent>
+                    <Button onClick={() => console.log(filteredEvents)}> CLICK </Button>
+                  </Card>
                 </div>
+
               </div>
             </div>
 
@@ -78,3 +89,8 @@ export default function DashboardPage() {
 
   )
 }
+
+
+// SELECT originatorid, COUNT(*)
+// FROM event
+// GROUP BY originatorid;

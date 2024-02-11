@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // import corsMiddleware from '@/utils/corsMiddleware';
 // import { getEvents } from '@/models/Events';
 import { getUrls } from '@/models/Urls';
-import moment from 'moment'; 
+import moment from 'moment';
 
 import { config } from '@/lib/config';
 import { getEvents } from '@/models/Event';
 
 const defaultTimespan = {
-	start: moment().subtract(24, 'hours').toDate(),
+	start: moment().subtract(100, 'hours').toDate(),
 	end: moment().toDate(),
 };
 
@@ -36,20 +36,33 @@ export async function GET(
 	const end = _url.searchParams.get('end');
 	const filter = _url.searchParams.get('filter');
 
+	// const params = {
+	// 	start: start ? moment.utc(start).toDate() : defaultTimespan.start,
+	// 	end: end ? moment.utc(end).toDate() : defaultTimespan.end,
+	// 	filter: filter,
+	// };
 	const params = {
-		start: start ? moment.utc(start).toDate() : defaultTimespan.start,
-		end: end ? moment.utc(end).toDate() : defaultTimespan.end,
+		start: new Date("2020-02-09T23:50:02.114Z"),
+		end: new Date("2028-02-09T23:50:02.114Z"),
 		filter: filter,
-	};
+
+	}
+	console.log("PARAMSZ")
+	console.log(params)
 
 	const data = await queryData(params.start, params.end, <string>params.filter);
-    console.log(data)
-    return Response.json({ message: 200 })
+	console.log("ORIGINAL DATRA")
+	console.log(data)
+	console.log(data.events.length)
+	// console.log("STARTING DATAZZZZ")
+	// console.log(data)
+	// console.log("ENDING DATAZZZZ")
+	return Response.json(data)
 
 	// res.status(200).json(data);
 }
 
-// curl 'http://localhost:3000/api/path?start=2024-02-01T00:00:00Z&end=2024-02-02T00:00:00Z&filter=someFilterValue'
+// curl 'http://localhost:3000/api/data/all?start=2024-02-10T01:00:00Z&end=2024-02-10T02:00:00Z'
 
 
 // curl "http://localhost:3000/api/data/all?start="

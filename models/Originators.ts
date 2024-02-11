@@ -141,7 +141,6 @@ export const extractParamsForOriginator = async (
     };
 };
 
-
 // https://yourdomain.com/api/yourEndpoint?
 // curl "http://localhost:3000/api/collect?type=someType&url=someUrl&originatorId=someId" \
 // -H "x-vercel-ip-country: CountryName" \

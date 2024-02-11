@@ -84,7 +84,7 @@ export const getEvents = async (
                 lte: end,
             },
         },
-        take: 2500,
+        take: 10000,
         orderBy: { timestamp: 'desc' },
     });
 
@@ -99,3 +99,8 @@ export const getEvents = async (
 
     return events;
 };
+
+// SELECT *
+// FROM event
+// ORDER BY timestamp DESC
+// LIMIT 10;

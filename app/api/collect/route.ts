@@ -8,7 +8,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // import { createEvent } from '@/models/Events';
 
-export default async  function handler (request: NextApiRequest) {
+export async function GET(request: NextApiRequest) {
     // await corsMiddleware(req, res);
     
     console.log(request)
