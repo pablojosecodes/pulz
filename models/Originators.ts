@@ -1,6 +1,7 @@
 import type { NextApiRequest } from 'next';
 
 import { nanoid } from 'nanoid';
+import { NextRequest } from 'next/server';
 
 export const temporaryConfig: { [key: string]: string | string[] | undefined } = {
 	APP_URL: 'http://localhost:3000',
@@ -22,14 +23,14 @@ export const isValidUrl = (urlString: string): boolean => {
 };
 
 const parseLocationFromRequest = (
-	req: NextApiRequest
+	req: NextRequest
 ): { city: string; country: string } => {
 	const headers = req.headers;
     console.log(headers)
-    console.log(headers['x-vercel-ip-country'])
+    console.log(headers.get('x-vercel-ip-country'))
 
-	const decodedCountry = decodeURI(<string>headers['x-vercel-ip-country']);
-	const decodedCity = decodeURI(<string>headers['x-vercel-ip-city']);
+	const decodedCountry = decodeURI(<string>headers.get('x-vercel-ip-country'))
+	const decodedCity = decodeURI(<string>headers.get('x-vercel-ip-city'))
 
 	const country = decodedCountry ?? 'undefined';
 	const city = decodedCity ?? 'undefined';
@@ -105,7 +106,7 @@ export const checkIfOriginatorExists = async (originatorId: string | null): Prom
 };
 
 export const extractParamsForOriginator = async (
-    req: NextApiRequest
+    req: NextRequest
 ): Promise<{
     type: string;
     url: string;

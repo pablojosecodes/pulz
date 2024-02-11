@@ -3,23 +3,40 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // import corsMiddleware from '@/utils/corsMiddleware';
 import { createOriginator } from '@/models/Originators';
 import generateStatsCollector from '@/lib/generateStatsCollector';
-import corsMiddleware from '@/lib/middle';
+// import corsMiddleware from '@/lib/middle';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function get(
-	req: NextApiRequest,
-	res: NextApiResponse
+
+function sendResponse(obfuscatedJs: string) {
+	const response = NextResponse.json({ body: obfuscatedJs }, { status: 200 })
+
+	// return 
+
+	// Set headers
+	response.headers.set('Content-Type', 'application/javascript');
+	response.headers.set('Cache-Control', 'private, max-age=0, must-revalidate');
+
+
+
+	return response;
+}
+
+
+
+export async function GET(
+	req: NextRequest,
+	res: NextResponse
 ) {
-	await corsMiddleware(req, res);
+	// await corsMiddleware(req, res);
 
-	const origin = req.headers.origin ?? '';
+	const origin = req.headers.get("origin") ?? '';
 
 	const originatorId = await createOriginator(origin);
 
 	const obfuscatedJs = generateStatsCollector(originatorId);
 
-	res
-		.setHeader('Content-Type', 'application/javascript')
-		.setHeader('Cache-Control', 'private, max-age=0, must-revalidate')
-		.status(200)
-		.send(obfuscatedJs);
+
+	return sendResponse(obfuscatedJs)
 }
+
+

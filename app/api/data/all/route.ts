@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import { config } from '@/lib/config';
 import { getEvents } from '@/models/Event';
+import { NextRequest, NextResponse } from 'next/server';
 
 const defaultTimespan = {
 	start: moment().subtract(100, 'hours').toDate(),
@@ -24,8 +25,8 @@ async function queryData(
 }
 
 export async function GET(
-	req: NextApiRequest,
-	res: NextApiResponse
+	req: NextRequest,
+	res: NextResponse
 ) {
 	// await corsMiddleware(req, res);
 

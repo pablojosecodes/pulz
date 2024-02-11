@@ -2,13 +2,14 @@
 import { createEvent } from '@/models/Event';
 import { extractParamsForOriginator } from '@/models/Originators';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest } from 'next/server';
 
 // import corsMiddleware from '@/utils/corsMiddleware';
 // import { extractParamsForCollector } from '@/models/Collector';
 
 // import { createEvent } from '@/models/Events';
 
-export async function GET(request: NextApiRequest) {
+export async function GET(request: NextRequest) {
     // await corsMiddleware(req, res);
     
     console.log(request)

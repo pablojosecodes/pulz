@@ -9,24 +9,21 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 // import { createEvent } from '@/models/Events';
 import { nanoid } from 'nanoid';
+import { NextRequest } from 'next/server';
 
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-export async function POST(request: NextApiRequest) {
+export async function POST(request: NextRequest) {
 
-    const origin = request.headers.origin ?? '';
-	console.log(request.headers['origin'])
-	console.log(request.headers['host'])
-	console.log(request.headers.host)
-	console.log(request.headers.or)
+    const origin = request.headers.get("origin") ?? '';
+	console.log(request.headers.get('origin'))
+	console.log(request.headers.get('host'))
+
 
 	console.log(request)
-	// request.get('origin')
 
-	// console.log(request.headers)
-	// console.log(origin)
 	const originatorId = nanoid(9)
 
 	const originator = await prisma.originator.create({
@@ -37,8 +34,8 @@ export async function POST(request: NextApiRequest) {
 		},
 	});
 
-	return originatorId
 
+	return Response.json({ originatorId })
 };
 
 
