@@ -2,7 +2,8 @@
 import { useSettings } from "@/util/SettingsContext";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
-import Dashboard from "@/components/Dashboard";
+
+import Dashboard from "@/components/dashboard";
 import { useEffect, useMemo } from "react";
 
 
