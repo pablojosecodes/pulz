@@ -3,20 +3,46 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-  } from "@/components/ui/card"
-import { DummyOverview } from "./DummyOverview"
+} from "@/components/ui/card"
+import ActivityBoard from "./DummyOverview"
 
 
-  
-  export default function Activity() {
+
+// Define the type for a single event
+type Event = {
+    city: string;
+    country: string;
+    id: string;
+    originatorid: string;
+    timestamp: string;
+    type: string;
+    url: string;
+};
+
+// Define the props for the component
+type MyComponentProps = {
+    events: Event[];
+};
+
+// Define the type for chart data
+type ChartData = {
+    date: string;
+    events: number;
+};
+
+
+
+const Activity: React.FC<MyComponentProps> = ({ events }) => {
     return (
         <Card className=" col-span-4">
             <CardHeader>
                 <CardTitle>Activity</CardTitle>
             </CardHeader>
             <CardContent className="pl-2">
-                <DummyOverview />
+                <ActivityBoard events={events} />
             </CardContent>
         </Card>
     )
-}
+};
+
+export default Activity;

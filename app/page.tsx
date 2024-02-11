@@ -16,7 +16,6 @@ export default function Home() {
 		mutate();
 	};
 
-
 	// Refresh data loop
 	useEffect(() => {
 		const intervalId = setInterval(() => {

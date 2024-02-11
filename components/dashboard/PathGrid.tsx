@@ -40,125 +40,52 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-    {
-        id: "m5gr84i9",
-        events: 316,
-        host: "root",
-        pathname: "/home",
-    },
-    {
-        id: "3u1reuv4",
-        events: 242,
-        host: "root",
-        pathname: "/",
-    },
-    {
-        id: "derv1ws0",
-        events: 837,
-        host: "reference",
-        pathname: "/typescript",
-    },
-    {
-        id: "5kma53ae",
-        events: 874,
-        host: "root",
-        pathname: "/basic",
-    },
-    {
-        id: "bhqecj4p",
-        events: 721,
-        host: "notes",
-        pathname: "/visit",
-    },
-]
 
-export type Payment = {
-    id: string
-    events: number
-    host: "root" | "notes" | "reference",
-    pathname: string
-}
+export type DataItem = {
+    id: string;
+    type: string;
+    pathname: string;
+    count: number; // New field for event count
+    // ... other fields if necessary
+};
 
-export const columns: ColumnDef<Payment>[] = [
-    // {
-    //     id: "select",
-    //     header: ({ table }) => (
-    //         <Checkbox
-    //             checked={
-    //                 table.getIsAllPageRowsSelected() ||
-    //                 (table.getIsSomePageRowsSelected() && "indeterminate")
-    //             }
-    //             onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
-    //             aria-label="Select all"
-    //         />
-    //     ),
-    //     cell: ({ row }) => (
-    //         <Checkbox
-    //             checked={row.getIsSelected()}
-    //             onCheckedChange={(value: any) => row.toggleSelected(!!value)}
-    //             aria-label="Select row"
-    //         />
-    //     ),
-    //     enableSorting: false,
-    //     enableHiding: false,
-    // },
-    {
-        accessorKey: "host",
-        header: "Host",
-        cell: ({ row }) => (
-            <div >{row.getValue("host")}</div>
-        ),
-    },
+
+
+// export type DataItem = {
+//     id: string;
+//     url: string;
+//     type: string;
+//     country?: string;
+//     city?: string;
+//     timestamp: string;
+//     originatorid: string;
+//   };
+  
+  export const columns: ColumnDef<DataItem>[] = [
     {
         accessorKey: "pathname",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Pathname
-                    <CaretSortIcon className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("pathname")}</div>,
+        header: "Pathname",
+        cell: ({ row }) => <div>{row.getValue("pathname")}</div>,
     },
     {
-        accessorKey: "events",
-        header: ({ column }) => {
-            return (
-                <div className="w-full  flex justify-end">
-
-
-                    <Button
-                        className="text-right "
-                        variant="ghost"
-                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    >
-                        Events
-                        <CaretSortIcon className="ml-2 h-4 w-4" />
-                    </Button>
-                </div>
-            )
-        },
-        cell: ({ row }) => <div className="text-right lowercase">{row.getValue("events")}</div>,
+        accessorKey: "count",
+        header: "Events",
+        cell: ({ row }) => <div>{row.getValue("count")}</div>,
     },
+    {
+      accessorKey: "url",
+      header: "URL",
+      cell: ({ row }) => <div>{row.getValue("url")}</div>,
+    },
+  ];
 
-    // {
-    //     accessorKey: "events",
-    //     header: () => <div className="text-right">Events</div>,
-    //     cell: ({ row }) => {
-    //         const events = parseFloat(row.getValue("events"))
-
-    //         return <div className="text-right font-medium">{events}</div>
-    //     },
-    // },
-]
-
-export function PathGrid() {
-    const [sorting, setSorting] = React.useState<SortingState>([])
+  
+type PathGridProps = {
+    data: DataItem[];
+  };
+  
+  export function PathGrid({ data }: PathGridProps) {
+      const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
@@ -166,6 +93,7 @@ export function PathGrid() {
         React.useState<VisibilityState>({})
 
 
+        
     const table = useReactTable({
         data,
         columns,

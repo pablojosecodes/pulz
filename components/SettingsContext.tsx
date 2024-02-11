@@ -40,17 +40,23 @@ export const timespans = {
 		start: moment().subtract(1, 'months').startOf('day'),
 		end: moment().subtract(1, 'months').endOf('month'),
 	},
+	test: {
+		text: '30 days',
+		start: moment(new Date("2020-02-09T23:50:02.114Z")),
+		end: moment(new Date("2028-02-09T23:50:02.114Z")),
+	},
+
 };
 
 const defaultSettings = {
 	paused: false,
-	timespan: timespans.today,
+	timespan: timespans.week,
 	filter: '',
 };
 
 const SettingsContext = createContext({
 	settings: defaultSettings,
-	setSettings: (settings: Settings) => {},
+	setSettings: (settings: Settings) => { },
 });
 
 function SettingsProvider({ children }: { children: ReactNode }) {

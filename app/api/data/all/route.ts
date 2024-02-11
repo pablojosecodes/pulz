@@ -36,24 +36,50 @@ export async function GET(
 	const end = _url.searchParams.get('end');
 	const filter = _url.searchParams.get('filter');
 
-	// const params = {
-	// 	start: start ? moment.utc(start).toDate() : defaultTimespan.start,
-	// 	end: end ? moment.utc(end).toDate() : defaultTimespan.end,
-	// 	filter: filter,
-	// };
-	const params = {
-		start: new Date("2020-02-09T23:50:02.114Z"),
-		end: new Date("2028-02-09T23:50:02.114Z"),
-		filter: filter,
+	console.log("PARAMS1")
+	console.log(_url.searchParams)
 
-	}
+	const params = {
+		start: start ? moment.utc(start).toDate() : defaultTimespan.start,
+		end: end ? moment.utc(end).toDate() : defaultTimespan.end,
+		filter: filter,
+	};
+
+	// const params = {
+	// 	start: new Date("2020-02-09T23:50:02.114Z"),
+	// 	end: new Date("2028-02-09T23:50:02.114Z"),
+	// 	filter: filter,
+
+	// }
 	console.log("PARAMSZ")
 	console.log(params)
 
+	// {
+	// 	start: 2024-02-10T00:00:00.000Z,
+	// 	end: 2024-02-10T23:59:59.000Z,
+	// 	filter: null
+	//   }
+
+	//   {
+	// 	start: 2024-02-10T00:00:00.000Z,
+	// 	end: 2024-02-10T23:59:59.000Z,
+	// 	filter: null
+	//   }
+	//   {
+	// 	start: 2024-02-10T00:00:00.000Z,
+	// 	end: 2024-02-10T23:59:59.000Z,
+	// 	filter: null
+	//   }
+			
+	// {
+	// 	start: 2024-02-10T00:00:00.000Z,
+	// 	end: 2024-02-10T23:59:59.000Z,
+	// 	filter: null
+	//   }
+	  
+
 	const data = await queryData(params.start, params.end, <string>params.filter);
-	console.log("ORIGINAL DATRA")
-	console.log(data)
-	console.log(data.events.length)
+
 	// console.log("STARTING DATAZZZZ")
 	// console.log(data)
 	// console.log("ENDING DATAZZZZ")
