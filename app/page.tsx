@@ -2,8 +2,8 @@
 import { useSettings } from "@/util/SettingsContext";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
-import { useEffect, useMemo } from "react";
 import Dashboard from "@/components/Dashboard";
+import { useEffect, useMemo } from "react";
 
 
 export default function Home() {
