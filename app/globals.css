@@ -49,27 +49,73 @@
     --ring: 224.3 76.3% 48%;
   }
 
-  .cat  {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-  }
+  .hn {
+    --background: 24 100.0% 50.0%;
+    /* Hacker News' orange for background */
+    --foreground:  0 0% 100%;
+    /* White for foreground text */
+    --card: 60 28.0% 95.1%;
+    /* Off-white for card backgrounds */
+    --card-foreground: 0 0% 0%;
+    /* Black for text on cards */
+    --popover: 24 100.0% 50.0%;
+    /* Hacker News' orange for popovers */
+    --popover-foreground: #f5f5f5;
+    /* White for text on popovers */
+    --primary: 24 100.0% 50.0%;
+    /* Hacker News' orange for primary elements */
+    --primary-foreground: 0 0% 0%;
+    /* Black for text on primary elements */
+    --secondary: 60 28.0% 95.1%;
+    /* Off-white for secondary elements */
+    --secondary-foreground: 0 0% 0%;
+    /* Black for text on secondary elements */
+    --muted: 60 28.0% 95.1%;
+    /* Off-white for muted elements */
+    --muted-foreground: 0 0% 0%;
+    /* Black for text on muted elements */
+    --accent: 24 100.0% 50.0%;
+    /* Hacker News' orange for accent elements */
+    --accent-foreground:  0 0% 100%;
+    /* White for text on accent elements */
+    --destructive: 0 100% 40%;
+    /* Red for destructive elements */
+    --destructive-foreground:  0 0% 100%;
+    /* White for text on destructive elements */
+    --border: #d4d4d4;
+    /* Light grey for borders */
+    --input: 60 28.0% 95.1%;
+    /* Off-white for inputs */
+    --ring: 24 100.0% 50.0%;
+    /* Hacker News' orange for focus rings */
+}
+
+
+  /* .hn {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 24.6 95% 53.1%;
+    --radius: 0.75rem;
+  } */
+
+
+
 
 }
 

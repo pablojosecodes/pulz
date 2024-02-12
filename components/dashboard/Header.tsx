@@ -19,6 +19,7 @@ import ThemeButton from "../theme/ThemeButton"
 import { Button } from "../ui/button"
 import { timespans, useSettings } from "@/util/SettingsContext"
 import { useEffect } from "react"
+import { useTheme } from "next-themes"
 
 export default function Header() {
     const { settings, setSettings } = useSettings();
@@ -35,14 +36,19 @@ export default function Header() {
     useEffect(() => {
         console.log("Updated Settings: ", settings);
     }, [settings]);
+    const { setTheme } = useTheme()
 
+
+    const click = () => {
+        console.log('HI')
+        setTheme("dark")
+    }
     return (
         <div className="flex justify-between">
             <TabsList className="relative">
-                <TabsContent value="Hi">
-                    HI
-                </TabsContent>
-                {/* ... your TabsTriggers ... */}
+                <Button className="bg-transparent hover:bg-transparent text-neutral-400" onClick={() => setTheme("light")} value="Default">Base</Button>
+                <Button className="bg-transparent hover:bg-transparent text-neutral-400" onClick={() => setTheme("dark")} value="Dark">Dark</Button>
+                <Button className="bg-transparent hover:bg-transparent text-neutral-400" onClick={() => setTheme("hn")} value="HN">HN</Button>
             </TabsList>
 
             <div className="flex items-center space-x-2">

@@ -67,12 +67,12 @@ type PathProps = {
 };
 
 export function Paths({ data }: PathProps) {
-    const [sorting, setSorting] = React.useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-        []
-    )
-    const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+    const [sorting, setSorting] = React.useState<SortingState>([
+        { id: 'count', desc: true }
+    ]);
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+
 
 
 
@@ -86,12 +86,10 @@ export function Paths({ data }: PathProps) {
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
-
         state: {
             sorting,
             columnFilters,
             columnVisibility,
-
         },
     })
 

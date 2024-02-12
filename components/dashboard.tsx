@@ -8,7 +8,7 @@ import Sidebar from "@/components/dashboard/Sidebar"
 import Header from "@/components/dashboard/Header"
 import {
   Card,
- CardContent,
+  CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -33,29 +33,28 @@ export default function Dashboard({ filteredEvents }: { filteredEvents: any }) {
         <Tabs defaultValue="all" className="space-y-4">
 
           <Header />
-          <ThemeButton />
 
           <TabsContent value="all" className="space-y-4">
-            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-5">
+            <div className="grid gap-2 grid-cols-1 lg:grid-cols-5">
 
-              <div className="col-span-1 gap-x-2">
+              <div className="col-span-1 grid lg:grid-cols-1 grid-cols-3 gap-x-2">
                 <Sidebar events={filteredEvents} />
               </div>
 
               <div className=" gap-y-2 grid col-span-4">
 
-                <Card className=" col-span-4">
+                <Card className="bg-white ">
                   <CardHeader>
                     <CardTitle>Activity</CardTitle>
                   </CardHeader>
-                  <CardContent className="pl-2">
+                  <CardContent className="max-w-full  overflow-x-auto pl-2">
                     <Activity events={filteredEvents} />
                   </CardContent>
                 </Card>
 
-                <div className="flex  gap-x-2 ƒflex-wrap md:flex-nowrap">
+                <div className="grid lg:flex max-w-full  overflow-x overflow-x-auto  gap-x-2 lg:flex-wrap lg:flex-nowrap">
 
-                  <Card className="flex-1">
+                  <Card className="max-w-full lg:flex-1">
                     <CardHeader>
                       <CardTitle>Popular paths</CardTitle>
                     </CardHeader>
@@ -64,7 +63,7 @@ export default function Dashboard({ filteredEvents }: { filteredEvents: any }) {
                     </CardContent>
                   </Card>
 
-                  <Card className="flex-1">
+                  <Card className="max-w-full lg:flex-1">
                     <CardHeader>
                       <CardTitle>Recent Logs</CardTitle>
                     </CardHeader>

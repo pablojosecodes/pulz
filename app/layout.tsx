@@ -20,15 +20,19 @@ export default function RootLayout({
 
       <script src="collectit.js" defer></script>
 
-      <SettingsProvider>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
-          <body className={inter.className}>{children}</body>
-        </ThemeProvider>
-      </SettingsProvider>
-    </html>
+      <body className={inter.className}>
+
+        <SettingsProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            {children}
+
+          </ThemeProvider>
+        </SettingsProvider>
+      </body>
+    </html >
   );
 }

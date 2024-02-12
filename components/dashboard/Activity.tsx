@@ -12,7 +12,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 type ActivityProps = {
   events: Event[];
-  timespan: 'day' | 'week' | 'month';
+
 };
 
 const Activity: React.FC<ActivityProps> = ({ events }) => {
@@ -79,11 +79,11 @@ const Activity: React.FC<ActivityProps> = ({ events }) => {
   };
   const countEventsPerMonth = () => {
     let counts: { [key: string]: BasicChartData } = {};
-    
+
     // Get the current date and first date of the month
     let currentDate = new Date();
     let firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    
+
     // Iterate over each day of the month
     while (firstDayOfMonth.getMonth() === currentDate.getMonth()) {
       let dateString = firstDayOfMonth.toISOString().split('T')[0];
@@ -119,16 +119,28 @@ const Activity: React.FC<ActivityProps> = ({ events }) => {
     }
   }, [events, settings]);
 
+  const style = getComputedStyle(document.documentElement);
+
+  const chartStyles = {
+    background: style.getPropertyValue('--background'),
+    foreground: style.getPropertyValue('--foreground'),
+    // ... other variables
+  };
+
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={chartData}>
+    <ResponsiveContainer className="text-neutral-800 " width="100%" height={300}>
+      <LineChart data={chartData}
+        style={{ background: chartStyles.background, color: chartStyles.foreground }}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey={settings.timespan.text === 'Yesterday' || settings.timespan.text === 'Today' ? 'time' : 'dayOfWeek'} />
         <YAxis />
         <Tooltip />
         <Legend />
+        {/* <Line type="monotone" dataKey="events" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
         <Line type="monotone" dataKey="events" stroke="#8884d8" activeDot={{ r: 8 }} />
+
       </LineChart>
     </ResponsiveContainer>
   );
