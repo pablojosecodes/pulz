@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
+      
       <script src="collectit.js" defer></script>
 
       <body className={inter.className}>

@@ -3,13 +3,16 @@ import JavaScriptObfuscator from 'javascript-obfuscator';
 import { config } from './config';
 
 const generateStatsCollector = (collectorId: string) => {
-	const url = config.APP_URL;
+    const url = config.APP_URL;
 
-	const js = `
+    const js = `
     "use strict"
 
+    console.log("zzzzzzzz")
     function init(){
+        console.log("INIT") 
         document.addEventListener('click', function(event) {
+            console.log("CLICK")
             if (event.target.tagName === 'A') {
                 const target = event.target.getAttribute('target');
                 const href = event.target.getAttribute('href');
@@ -20,6 +23,7 @@ const generateStatsCollector = (collectorId: string) => {
                     collect('link_click');
                 }
             }
+            collect('click');
         });
 
         window.addEventListener("beforeunload", function(event) {
@@ -32,7 +36,7 @@ const generateStatsCollector = (collectorId: string) => {
     async function send(type = "pageview") {
         let url = new URL("${url}/api/collect")
 
-        url.searchParams.set('collector', '${collectorId}')
+        url.searchParams.set('originatorId', '${collectorId}')
         url.searchParams.set('type', type)
         url.searchParams.set('url', window.location.href)
 
@@ -60,18 +64,19 @@ const generateStatsCollector = (collectorId: string) => {
 
     `;
 
-	const obfuscatedJs = JavaScriptObfuscator.obfuscate(js, {
-		compact: true,
-		controlFlowFlattening: true,
-		controlFlowFlatteningThreshold: 1,
-		numbersToExpressions: true,
-		simplify: true,
-		stringArrayShuffle: true,
-		splitStrings: true,
-		stringArrayThreshold: 1,
-	}).getObfuscatedCode();
+    const obfuscatedJs = JavaScriptObfuscator.obfuscate(js, {
+        compact: true,
+        controlFlowFlattening: true,
+        controlFlowFlatteningThreshold: 1,
+        numbersToExpressions: true,
+        simplify: true,
+        stringArrayShuffle: true,
+        splitStrings: true,
+        stringArrayThreshold: 1,
+    }).getObfuscatedCode();
 
-	return obfuscatedJs;
+    // return obfuscatedJs;
+    return js;
 };
 
 export default generateStatsCollector;
