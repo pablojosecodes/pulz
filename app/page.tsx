@@ -1,5 +1,5 @@
 'use client'
-import { useSettings } from "@/util/SettingsContext";
+import { SettingsProvider, useSettings } from "@/util/SettingsContext";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
 
@@ -8,7 +8,6 @@ import { useEffect, useMemo } from "react";
 
 
 export default function Home() {
-
 
 	// Settings and data
 	const { settings } = useSettings();
@@ -24,7 +23,7 @@ export default function Home() {
 			if (settings.paused) return;
 
 			refreshData();
-		}, 1000);
+		}, 100000000);
 		return () => clearInterval(intervalId);
 	}, [settings.paused]);
 
@@ -44,6 +43,7 @@ export default function Home() {
 
 	// The page
 	return (
+
 		<Dashboard filteredEvents={filteredEvents} />
 	);
 }

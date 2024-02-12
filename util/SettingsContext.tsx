@@ -39,7 +39,8 @@ export const timespans = {
 	month: {
 		text: '30 days',
 		start: moment().subtract(1, 'months').startOf('day'),
-		end: moment().subtract(1, 'months').endOf('month'),
+		end: moment().endOf('day'),
+		// end: moment().subtract(1, 'months').endOf('month'),
 	},
 	test: {
 		text: '30 days',

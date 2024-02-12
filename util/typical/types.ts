@@ -45,8 +45,17 @@ export type DataItem = {
 
 
 // Update the type for chart data to include dayOfWeek
+// export type BasicChartData = {
+//     date: string;
+//     dayOfWeek: string;
+//     events: number;
+// };
 export type BasicChartData = {
-    date: string;
-    dayOfWeek: string;
+    date?: string;  // Making date optional as well, as it's not used in hourly data
     events: number;
-};
+    dayOfWeek?: string;
+    month?: string;
+    dayOfMonth?: number;
+    time?: string;  // Add this for hourly data
+  };
+  

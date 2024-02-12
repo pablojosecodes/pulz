@@ -21,6 +21,7 @@ import { Logs } from "@/components/dashboard/Logs"
 import { aggregateDataByPathname } from "@/util/data";
 
 import Activity from "./dashboard/Activity"
+import ThemeButton from "./theme/ThemeButton"
 
 
 export default function Dashboard({ filteredEvents }: { filteredEvents: any }) {
@@ -32,6 +33,7 @@ export default function Dashboard({ filteredEvents }: { filteredEvents: any }) {
         <Tabs defaultValue="all" className="space-y-4">
 
           <Header />
+          <ThemeButton />
 
           <TabsContent value="all" className="space-y-4">
             <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-5">
