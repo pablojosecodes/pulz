@@ -35,7 +35,7 @@ export default function Dashboard({ filteredEvents }: { filteredEvents: any }) {
           <TabsContent value="all" className="space-y-4">
             <div className="grid gap-2 grid-cols-1 lg:grid-cols-5">
 
-              <div className="col-span-1 grid gap-y-2 self-start lg:grid-cols-1 grid-cols-3 gap-x-2">
+              <div className="col-span-1 grid gap-y-2 self-start lg:grid-cols-1 sm:grid-cols-3 grid-cols-2 gap-x-2">
                 <Sidebar events={filteredEvents} />
               </div>
 

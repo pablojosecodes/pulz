@@ -22,7 +22,7 @@ export default function Home() {
 		const intervalId = setInterval(() => {
 			if (settings.paused) return;
 			refreshData();
-		}, 100000000);
+		}, 100000);
 		return () => clearInterval(intervalId);
 	}, [settings.paused]);
 
