@@ -1,7 +1,5 @@
 'use client'
 
-import { Metadata } from "next"
-
 // Components
 import { Paths } from "@/components/dashboard/Paths"
 import Sidebar from "@/components/dashboard/Sidebar"

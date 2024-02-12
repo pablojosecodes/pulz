@@ -119,19 +119,11 @@ const Activity: React.FC<ActivityProps> = ({ events }) => {
     }
   }, [events, settings]);
 
-  const style = getComputedStyle(document.documentElement);
-
-  const chartStyles = {
-    background: style.getPropertyValue('--background'),
-    foreground: style.getPropertyValue('--foreground'),
-    // ... other variables
-  };
 
 
   return (
     <ResponsiveContainer className="text-neutral-800 " width="100%" height={300}>
       <LineChart data={chartData}
-        style={{ background: chartStyles.background, color: chartStyles.foreground }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey={settings.timespan.text === 'Yesterday' || settings.timespan.text === 'Today' ? 'time' : 'dayOfWeek'} />
