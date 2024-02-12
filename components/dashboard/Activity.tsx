@@ -122,7 +122,7 @@ const Activity: React.FC<ActivityProps> = ({ events }) => {
 
 
   return (
-    <ResponsiveContainer className="text-neutral-800 " width="100%" height={300}>
+    <ResponsiveContainer  className="text-neutral-800 " width="100%" height={300}>
       <LineChart data={chartData}
       >
         <CartesianGrid strokeDasharray="3 3" />

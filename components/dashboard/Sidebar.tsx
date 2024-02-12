@@ -20,7 +20,7 @@ const TypeCard = ({ type, count }: { type: string, count: number }) => {
     const animatedCount = useAnimatedCount(count);
 
     const iconMap: { [key: string]: JSX.Element } = {
-        "init": <Icons.create  className="h-5 w-5 text-muted-foreground"/>,
+        "init": <Icons.create className="h-5 w-5 text-muted-foreground" />,
         "exit": <Icons.exit className="h-5 w-5 text-muted-foreground" />,
         "click": <Icons.cursor className="h-5 w-5 text-muted-foreground" />,
         "Unique Sessions": <Icons.session className="h-5 w-5 text-muted-foreground" />,
@@ -51,7 +51,7 @@ const TypeCard = ({ type, count }: { type: string, count: number }) => {
                     </svg>}
                 </CardHeader>
                 <CardContent >
-                    <div className="text-2xl font-bold" > {animatedCount} </div>
+                    <div className="text-2xl font-bold" >{count == 0 ? <p className="animate-pulse mt-2 h-4 w-[20%] bg-foreground"></p> : animatedCount} </div>
 
                 </CardContent>
             </Card>
@@ -112,6 +112,8 @@ export default function Sidebar({ events }: { events: Event[] }) {
     const cities = countUniqueCities(events)
     const types = countEventsPerType(events)
 
+    const temporary = [0, 0, 0, 0];
+
 
 
 
@@ -119,20 +121,32 @@ export default function Sidebar({ events }: { events: Event[] }) {
 
     return (
         <>
-            <TypeCard key={`$Sessions-${sessionCount}`} type="Unique Sessions" count={sessions}/>
+            <TypeCard key={`$Sessions-${sessionCount}`} type="Unique Sessions" count={sessions} />
 
 
-            <TypeCard key={`$Cities-${cities}`} type="Unique Cities" count={cities}/>
+            <TypeCard key={`$Cities-${cities}`} type="Unique Cities" count={cities} />
 
 
-            <TypeCard key={`$Events-${count}`} type="Total Events" count={count}/>
+            <TypeCard key={`$Events-${count}`} type="Total Events" count={count} />
 
-            {Object.keys(types).map((type, ind) => {
-                return (
+            {
+                events.length == 0 ?
 
-                    <TypeCard key={`${type}-${types[type]}`} type={type} count={types[type]} />
-                )
-            })}
+                    temporary.map((ind, i) => {
+                        return (
+                            <TypeCard key={`t-${i}`} type={"Loading"} count={0} />
+                        )
+                    })
+                    :
+                    Object.keys(types).map((type, ind) => {
+                        return (
+
+                            <TypeCard key={`${type}-${types[type]}`} type={type} count={types[type]} />
+                        )
+                    })
+
+
+            }
         </>
     )
 

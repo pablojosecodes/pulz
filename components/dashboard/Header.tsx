@@ -36,7 +36,7 @@ export default function Header() {
     useEffect(() => {
         console.log("Updated Settings: ", settings);
     }, [settings]);
-    const { setTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
 
 
     const click = () => {
@@ -46,9 +46,9 @@ export default function Header() {
     return (
         <div className="flex justify-between">
             <TabsList className="relative">
-                <Button className="bg-transparent hover:bg-transparent text-neutral-400" onClick={() => setTheme("light")} value="Default">Base</Button>
-                <Button className="bg-transparent hover:bg-transparent text-neutral-400" onClick={() => setTheme("dark")} value="Dark">Dark</Button>
-                <Button className="bg-transparent hover:bg-transparent text-neutral-400" onClick={() => setTheme("hn")} value="HN">HN</Button>
+                <Button className={` bg-transparent hover:bg-transparent ${theme == "light" ? "text-neutral-900" : "text-neutral-400"}`} onClick={() => setTheme("light")} value="Default">Base</Button>
+                <Button className={`bg-transparent hover:bg-transparent  ${theme == "dark" ? "text-neutral-200" : "text-neutral-400"}`} onClick={() => setTheme("dark")} value="Dark">Dark</Button>
+                <Button className={`bg-transparent hover:bg-transparent  ${theme == "hn" ? "text-neutral-800" : "text-neutral-400"}`} onClick={() => setTheme("hn")} value="HN">HN</Button>
             </TabsList>
 
             <div className="flex items-center space-x-2">

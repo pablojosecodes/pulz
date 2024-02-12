@@ -7,7 +7,7 @@ export const useAnimatedCount = (end: number) => {
         duration: 3.2,
     });
 
-    return value;
+    return value; 
 };
 
 
