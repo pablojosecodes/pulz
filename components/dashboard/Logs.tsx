@@ -74,10 +74,10 @@ export function Logs({ data }: DataTableProps) {
         <div className="w-full">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter pathnames..."
-                    value={(table.getColumn("pathname")?.getFilterValue() as string) ?? ""}
+                    placeholder="Filter cities..."
+                    value={(table.getColumn("city")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("pathname")?.setFilterValue(event.target.value)
+                        table.getColumn("city")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />

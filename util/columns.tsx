@@ -36,12 +36,12 @@ export const columns: ColumnDef<DataItem>[] = [
             (row.getValue("url") as string) &&
             (row.getValue("url") as string).split("://").length > 1 &&
 
-            (row.getValue("url") as string).split("://")[1].slice(0, -1)}</div>,
+            (row.getValue("url") as string).split("://")[1].split("/")[0]}</div>,
     },
     {
         accessorKey: "pathname",
         header: "pathname",
-        cell: ({ row }) => <div>{
+        cell: ({ row }) => <div>/{
             (row.getValue("url") as string) &&
             (row.getValue("url") as string).split("://").length > 1 &&
 
@@ -49,7 +49,7 @@ export const columns: ColumnDef<DataItem>[] = [
     },
     {
         accessorKey: "type",
-        header: "Type",
+        header: "Action",
         cell: ({ row }) => <div>{row.getValue("type")}</div>,
     },
     {
