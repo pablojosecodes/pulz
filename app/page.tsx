@@ -1,11 +1,11 @@
 'use client'
-import { SettingsProvider, useSettings } from "@/util/globalSettings";
+import {  useSettings } from "@/util/globalSettings";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
 
 import Dashboard from "@/components/dashboard";
 import { useEffect, useMemo } from "react";
-import { Button } from "@/components/ui/button";
+
 
 
 export default function Home() {
