@@ -3,7 +3,8 @@ import JavaScriptObfuscator from 'javascript-obfuscator';
 import { config } from './config';
 
 const generateStatsCollector = (collectorId: string) => {
-    const url = config.APP_URL;
+    // const url = config.APP_URL;
+    const url= "http://localhost:3000"
 
     const js = `
     "use strict"
@@ -13,7 +14,7 @@ const generateStatsCollector = (collectorId: string) => {
         console.log("INIT") 
         document.addEventListener('click', function(event) {
             console.log("CLICK")
-            if (event.target.tagName === 'A') {
+            if (event.target.tagName === 'a') {
                 const target = event.target.getAttribute('target');
                 const href = event.target.getAttribute('href');
                 
@@ -39,11 +40,12 @@ const generateStatsCollector = (collectorId: string) => {
         url.searchParams.set('originatorId', '${collectorId}')
         url.searchParams.set('type', type)
         url.searchParams.set('url', window.location.href)
+        console.log(url)
 
         fetch(url)
         .then(res => res.json())
         .then(data => {
-            // console.log("📼", data)
+            console.log("📼", data)
         })
         .catch(rejected => {
             console.log("📼", "failed to collect")
@@ -56,6 +58,7 @@ const generateStatsCollector = (collectorId: string) => {
 
     window.collectStats = collect
 
+    console.log("LOADING");
     collect('loaded')
 
     window.addEventListener('load', function() {

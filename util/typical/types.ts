@@ -25,6 +25,7 @@ export const temporaryConfig: { [key: string]: string | string[] | undefined } =
     CORS_ALLOWED_ORIGIN: ['http://localhost:3000', 'https://udara.io'],
 };
 
+
 export const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",

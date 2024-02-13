@@ -30,12 +30,9 @@ export async function GET(
 	const origin = req.headers.get("origin") ?? '';
 
 	const originatorId = await createOriginator(origin);
-	console.log(originatorId)
 
 	const obfuscatedJs = generateStatsCollector(originatorId);
 	const response = sendResponse(obfuscatedJs)
-	console.log("obfuscatedJs")
-	console.log(obfuscatedJs)
 	return response
 }
 

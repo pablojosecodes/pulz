@@ -1,27 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import Cors from 'cors';
-import { config } from "../config";
+import { NextRequest, NextResponse } from 'next/server';
 
-export const defaultCors = Cors({
-	methods: ['OPTIONS', 'GET'],
-	origin: config.CORS_ALLOWED_ORIGIN,
-});
+const allowedOrigins = ['https://pulz.vercel.app', "http://localhost:3001", "http://localhost:3002"];
 
-// Credit: https://github.com/vercel/next.js/blob/canary/examples/api-routes-cors/pages/api/cors.ts
-function corsMiddleware(req: NextApiRequest, res: NextApiResponse) {
-	return new Promise((resolve, reject) => {
-		defaultCors(req, res, (result: any) => {
-			if (result instanceof Error) {
-				return reject(result);
-			}
+export function corsMiddleware(req: NextRequest) {
+    const requestOrigin = req.headers.get('origin');
+	if (!requestOrigin){
+		return false;
+	}
+    
+    // Check if the request origin is in the allowed origins list
+    return allowedOrigins.includes(requestOrigin)
 
-			return resolve(result);
-		});
-	});
 }
-
-export default corsMiddleware;
-
-
-
-
