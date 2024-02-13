@@ -62,7 +62,7 @@ export default function Header() {
                 </TabsList>
 
                 <div className="flex items-center space-x-2">
-                    <Switch defaultChecked onCheckedChange={onLiveChange}
+                    <Switch className="" defaultChecked onCheckedChange={onLiveChange}
                         id="live" />
                     <Label htmlFor="live">Live <span className="md:block hidden">
                         Updates
@@ -74,7 +74,7 @@ export default function Header() {
             <div className="flex items-center space-x-2">
 
                 <p className="md:block hidden">
-                    Built with <a target="_blank" className="text-neutral-100 font-semibold hover:text-white " href="https://github.com/pablojosecodes/pulz/">Pulz</a>
+                    Built with <a target="_blank" className="text-foreground text-opacity-80 font-semibold hover:text-opacity-100 " href="https://github.com/pablojosecodes/pulz/">Pulz</a>
                 </p>
                 <Select onValueChange={(e) => onChangeTimespan(e)}
                 >

@@ -54,7 +54,7 @@ const TypeCard = ({ type, count }: { type: string, count: number }) => {
                     </div>
                 </CardHeader>
                 <CardContent >
-                    <div className="text-2xl font-bold" >{count == 0 ? <p className="animate-pulse mt-2 h-4 w-[70%] md:w-[20%] bg-foreground"></p> : animatedCount} </div>
+                    <div className="text-2xl font-bold" >{count == 0 ? <p className="animate-pulse mt-2 h-4 w-[70%] md:w-[40%] bg-primary-foreground"></p> : animatedCount} </div>
 
                 </CardContent>
             </Card>
