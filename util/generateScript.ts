@@ -9,34 +9,28 @@ const generateScript = (originatorId: string) => {
     const js = `
     "use strict"
 
-    console.log("zzzzzzzz")
+
     function init(){
-        console.log("INIT") 
         document.addEventListener('click', function(event) {
-            console.log("CLICK")
             if (event.target.tagName === 'a') {
                 const target = event.target.getAttribute('target');
                 const href = event.target.getAttribute('href');
-                
                 if (target === '_blank') {
-                    collect('external_link_click');
+                    collect('external link');
                 } else {
-                    collect('link_click');
+                    collect('internal link');
                 }
             }
             collect('click');
         });
-
         window.addEventListener("beforeunload", function(event) {
            collect('exit')
         });
-
         collect('init')
     }
 
     async function send(type = "pageview") {
         let url = new URL("${url}/api/collect")
-
         url.searchParams.set('originatorId', '${originatorId}')
         url.searchParams.set('type', type)
         url.searchParams.set('url', window.location.href)
@@ -45,10 +39,10 @@ const generateScript = (originatorId: string) => {
         fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log("📼", data)
+            // console.log(data)
         })
         .catch(rejected => {
-            console.log("📼", "failed to collect")
+            console.log("failed to collect")
         });
     }
 
@@ -58,7 +52,6 @@ const generateScript = (originatorId: string) => {
 
     window.collectStats = collect
 
-    console.log("LOADING");
     collect('loaded')
 
     window.addEventListener('load', function() {
