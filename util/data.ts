@@ -20,8 +20,6 @@ export async function queryData(
 	return { events, urls };
 }
 
-
-
 /**
  * Checks if a string is a valid URL.
  * @param urlString The string to check.

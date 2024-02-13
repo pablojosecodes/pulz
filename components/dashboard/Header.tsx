@@ -8,20 +8,14 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@/components/ui/tabs"
-import { QuestionMarkIcon } from "@radix-ui/react-icons"
-import ThemeButton from "../theme/ThemeButton"
+
 import { Button } from "../ui/button"
 import { timespans, useSettings } from "@/util/globalSettings"
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Switch } from "../ui/switch"
 import { Label } from "../ui/label"
+import ThemeSwitches from "../theme/theme-switches"
 
 export default function Header() {
     const { settings, setSettings } = useSettings();
@@ -38,13 +32,10 @@ export default function Header() {
     useEffect(() => {
         console.log("Updated Settings: ", settings);
     }, [settings]);
-    const { theme, setTheme } = useTheme()
 
 
-    const click = () => {
-        console.log('HI')
-        setTheme("dark")
-    }
+
+
 
     const onLiveChange = (checked: boolean) => {
         setSettings({ ...settings, paused: checked });
@@ -54,13 +45,9 @@ export default function Header() {
     return (
         <div className="md:flex grid grid-cols-1 gap-y-2  justify-between">
             <div className="flex gap-x-2">
+                <ThemeSwitches />
 
-                <TabsList className="relative">
-                    <Button className={` bg-transparent hover:bg-transparent ${theme == "light" ? "text-neutral-900" : "text-neutral-400"}`} onClick={() => setTheme("light")} value="Default">Base</Button>
-                    <Button className={`bg-transparent hover:bg-transparent  ${theme == "dark" ? "text-neutral-200" : "text-neutral-400"}`} onClick={() => setTheme("dark")} value="Dark">Dark</Button>
-                    <Button className={`bg-transparent hover:bg-transparent  ${theme == "hn" ? "text-neutral-800" : "text-neutral-400"}`} onClick={() => setTheme("hn")} value="HN">HN</Button>
-                </TabsList>
-
+                
                 <div className="flex items-center space-x-2">
                     <Switch className="" defaultChecked onCheckedChange={onLiveChange}
                         id="live" />

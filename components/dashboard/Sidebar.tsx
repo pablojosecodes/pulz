@@ -7,13 +7,8 @@ import {
 import { useAnimatedCount } from "@/hooks/useAnimatedCount";
 import { Event } from "@/util/typical/types";
 import { useEffect, useState } from "react";
-import { useCountUp } from 'use-count-up';
 
 import { Icons } from "../ui/icons";
-import { ContextMenuTrigger } from "@radix-ui/react-context-menu";
-
-
-
 
 
 const TypeCard = ({ type, count }: { type: string, count: number }) => {

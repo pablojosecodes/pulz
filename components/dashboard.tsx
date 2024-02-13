@@ -19,7 +19,7 @@ import { Logs } from "@/components/dashboard/Logs"
 import { aggregateDataByPathname } from "@/util/data";
 
 import Activity from "./dashboard/Activity"
-import ThemeButton from "./theme/ThemeButton"
+
 
 
 export default function Dashboard({ filteredEvents }: { filteredEvents: any }) {
