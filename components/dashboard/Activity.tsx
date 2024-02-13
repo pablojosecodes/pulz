@@ -109,12 +109,13 @@ const Activity: React.FC<ActivityProps> = ({ events }) => {
     setChartData(dataForChart);
   };
 
+
   useEffect(() => {
     if (settings.timespan.text === 'Yesterday' || settings.timespan.text === 'Today') {
       countEventsPerHour();
     } else if (settings.timespan.text === '7 days') {
       countEventsPerDay();
-    } else if (settings.timespan.text === 'This month') {
+    } else if (settings.timespan.text === '30 days') {
       countEventsPerMonth();
     }
   }, [events, settings]);
@@ -122,11 +123,11 @@ const Activity: React.FC<ActivityProps> = ({ events }) => {
 
 
   return (
-    <ResponsiveContainer  className="text-neutral-800 " width="100%" height={300}>
+    <ResponsiveContainer className="text-neutral-800 " width="100%" height={300}>
       <LineChart data={chartData}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey={settings.timespan.text === 'Yesterday' || settings.timespan.text === 'Today' ? 'time' : 'dayOfWeek'} />
+        <XAxis dataKey={settings.timespan.text === 'Yesterday' || settings.timespan.text === 'Today' ? 'time' : settings.timespan.text == "7 days" ? 'dayOfWeek' : "dayOfMonth"} />
         <YAxis />
         <Tooltip />
         <Legend />

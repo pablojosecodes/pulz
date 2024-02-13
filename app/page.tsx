@@ -39,7 +39,6 @@ export default function Home() {
 			
 			return searcher.search(settings.filter);
 		}
-		
 
 
 		return events;
