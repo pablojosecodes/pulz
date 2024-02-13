@@ -1,5 +1,5 @@
 import { createOriginator } from '@/models/Originators';
-import generateStatsCollector from '@/util/generateStatsCollector';
+import generateScript from '@/util/generateScript';
 import { corsMiddleware } from '@/util/typical/middle';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -15,8 +15,6 @@ function sendResponse(obfuscatedJs: string) {
 	return response;
 }
 
-
-
 export async function GET(
 	req: NextRequest,
 	res: NextResponse
@@ -31,7 +29,7 @@ export async function GET(
 
 	const originatorId = await createOriginator(origin);
 
-	const obfuscatedJs = generateStatsCollector(originatorId);
+	const obfuscatedJs = generateScript(originatorId);
 	const response = sendResponse(obfuscatedJs)
 	return response
 }

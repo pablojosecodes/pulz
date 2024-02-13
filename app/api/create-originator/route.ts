@@ -31,6 +31,3 @@ export async function POST(request: NextRequest) {
 
 
 };
-
-
-// curl "http://localhost:3000/api/create-originator"

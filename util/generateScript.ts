@@ -3,7 +3,7 @@ import JavaScriptObfuscator from 'javascript-obfuscator';
 import { global_app } from './config';
 
 
-const generateStatsCollector = (collectorId: string) => {
+const generateScript = (originatorId: string) => {
     const url = global_app
 
     const js = `
@@ -37,7 +37,7 @@ const generateStatsCollector = (collectorId: string) => {
     async function send(type = "pageview") {
         let url = new URL("${url}/api/collect")
 
-        url.searchParams.set('originatorId', '${collectorId}')
+        url.searchParams.set('originatorId', '${originatorId}')
         url.searchParams.set('type', type)
         url.searchParams.set('url', window.location.href)
         console.log(url)
@@ -82,4 +82,4 @@ const generateStatsCollector = (collectorId: string) => {
     return js;
 };
 
-export default generateStatsCollector;
+export default generateScript;
