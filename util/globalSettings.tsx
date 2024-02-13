@@ -40,14 +40,7 @@ export const timespans = {
 		text: '30 days',
 		start: moment().subtract(1, 'months').startOf('day'),
 		end: moment().endOf('day'),
-		// end: moment().subtract(1, 'months').endOf('month'),
 	},
-	test: {
-		text: '30 days',
-		start: moment(new Date("2020-02-09T23:50:02.114Z")),
-		end: moment(new Date("2028-02-09T23:50:02.114Z")),
-	},
-
 };
 
 const defaultSettings = {

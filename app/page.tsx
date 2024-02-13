@@ -28,7 +28,7 @@ export default function Home() {
 	}, [settings.paused]);
 
 	// Data -> Events
-	let { events = [], urls = [] } = data ?? {};
+	let { events  = [], urls = [] } = data ?? {};
 
 	const filteredEvents = useMemo(() => {
 		if (settings.filter && events) {
@@ -36,8 +36,12 @@ export default function Home() {
 				caseSensitive: false,
 				sort: true,
 			});
+			
 			return searcher.search(settings.filter);
 		}
+		
+
+
 		return events;
 	}, [settings.filter, events]);
 
