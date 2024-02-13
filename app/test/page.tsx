@@ -1,5 +1,5 @@
 'use client'
-import { SettingsProvider, useSettings } from "@/util/SettingsContext";
+import { SettingsProvider, useSettings } from "@/util/globalSettings";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
 

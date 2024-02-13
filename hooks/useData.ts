@@ -1,11 +1,12 @@
 import useSWR from 'swr';
 
-import { Timespan } from '@/util/SettingsContext';
+import { Timespan } from '@/util/globalSettings';
 import { fetcher } from '@/util/data';
+import { global_app } from '@/util/config';
 
 
 const useData = (timespan: Timespan, filter: undefined | string) => {
-	const url = `/api/data/all?`;
+	const url = global_app + `/api/data/all?`;
 
 	const searchParams = new URLSearchParams();
 
@@ -23,11 +24,13 @@ const useData = (timespan: Timespan, filter: undefined | string) => {
 
 	const queryParams = searchParams.toString();
 
+
 	const { data, error, isLoading, mutate } = useSWR(
 		`${url}${queryParams}`,
 		fetcher,
 		{ keepPreviousData: true }
 	);
+
 
 
 	return { data, error, isLoading, mutate };

@@ -1,4 +1,4 @@
-import { useSettings } from '@/util/SettingsContext';
+import { useSettings } from '@/util/globalSettings';
 import { BasicChartData, Event } from '@/util/typical/types';
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';

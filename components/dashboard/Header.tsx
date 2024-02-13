@@ -17,7 +17,7 @@ import {
 import { QuestionMarkIcon } from "@radix-ui/react-icons"
 import ThemeButton from "../theme/ThemeButton"
 import { Button } from "../ui/button"
-import { timespans, useSettings } from "@/util/SettingsContext"
+import { timespans, useSettings } from "@/util/globalSettings"
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Switch } from "../ui/switch"
