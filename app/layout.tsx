@@ -25,7 +25,7 @@ export default function RootLayout({
         <SettingsProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="hn"
             disableTransitionOnChange
           >
             {children}

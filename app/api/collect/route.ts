@@ -9,8 +9,10 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest, response: NextResponse) {
     const allowedDomain = await corsMiddleware(request)
     if (!allowedDomain) {
-        return NextResponse.json({ message: 400 });
+        return NextResponse.json({ message: 403 });
     }
+
+    
     let { type, url, originatorId, country, city, error } =
         await paramsForOriginator(request);
     const d = await createEvent(type, url, originatorId, country, city);

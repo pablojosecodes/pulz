@@ -1,8 +1,10 @@
 import moment from 'moment';
-import { config } from '@/util/config';
 import { NextRequest, NextResponse } from 'next/server';
+
 import { corsHeaders } from '@/util/typical/types';
 import { queryData } from '@/util/data';
+import { global_app } from '@/util/config';
+import { corsMiddleware } from '@/util/typical/middle';
 
 
 const defaultTimespan = {
@@ -14,7 +16,12 @@ export async function GET(
 	req: NextRequest,
 	res: NextResponse
 ) {
-	const url = `${config.APP_URL}${req.url}`;
+	const allowedDomain = await corsMiddleware(req)
+	if (!allowedDomain) {
+		return NextResponse.json({ message: 403 });
+	}
+
+	const url = `${global_app}${req.url}`;
 	const _url: URL = new URL(url);
 
 	const start = _url.searchParams.get('start');

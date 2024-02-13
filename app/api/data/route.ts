@@ -1,5 +1,6 @@
 import { createOriginator } from '@/models/Originators';
 import generateStatsCollector from '@/util/generateStatsCollector';
+import { corsMiddleware } from '@/util/typical/middle';
 import { NextRequest, NextResponse } from 'next/server';
 
 
@@ -12,11 +13,6 @@ function sendResponse(obfuscatedJs: string) {
 		}
 	});
 	return response;
-
-	// const response = NextResponse.json(obfuscatedJs, { status: 200 })
-	// response.headers.set('Content-Type', 'application/javascript');
-	// response.headers.set('Cache-Control', 'private, max-age=0, must-revalidate');
-	// return response;
 }
 
 
@@ -25,7 +21,11 @@ export async function GET(
 	req: NextRequest,
 	res: NextResponse
 ) {
-	// await corsMiddleware(req, res);
+
+	const allowedDomain = await corsMiddleware(req)
+	if (!allowedDomain) {
+		return NextResponse.json({ message: 403 });
+	}
 
 	const origin = req.headers.get("origin") ?? '';
 

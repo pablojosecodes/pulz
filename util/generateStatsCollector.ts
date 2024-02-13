@@ -1,10 +1,10 @@
 
 import JavaScriptObfuscator from 'javascript-obfuscator';
-import { config } from './config';
+import { global_app } from './config';
+
 
 const generateStatsCollector = (collectorId: string) => {
-    // const url = config.APP_URL;
-    const url= "http://localhost:3000"
+    const url = global_app
 
     const js = `
     "use strict"

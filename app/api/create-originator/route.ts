@@ -1,3 +1,4 @@
+import { corsMiddleware } from '@/util/typical/middle';
 import { corsHeaders } from '@/util/typical/types';
 import { nanoid } from 'nanoid';
 import { NextRequest, NextResponse } from 'next/server';
@@ -9,7 +10,12 @@ const prisma = new PrismaClient()
 
 export async function POST(request: NextRequest) {
 
-    const origin = request.headers.get ?? '';
+	const allowedDomain = await corsMiddleware(request)
+	if (!allowedDomain) {
+		return NextResponse.json({ message: 403 });
+	}
+
+	const origin = request.headers.get ?? '';
 
 	const originatorId = nanoid(9)
 
@@ -20,7 +26,7 @@ export async function POST(request: NextRequest) {
 			timestamp: new Date(),
 		},
 	});
-    return NextResponse.json({ message: 200 }, { headers: corsHeaders })
+	return NextResponse.json({ message: 200 }, { headers: corsHeaders })
 
 
 

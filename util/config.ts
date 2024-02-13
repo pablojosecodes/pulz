@@ -1,4 +1,4 @@
-export const config: { [key: string]: string | string[] | undefined } = {
-	APP_URL: 'https://pulz.vercel.app',
-	CORS_ALLOWED_ORIGIN: ['stats.udara.io', 'https://udara.io', 'http://localhost:3001'],
-};
+export const global_app = 'https://pulz.vercel.app'
+
+
+export const global_allowed_origins = ['https://pulz.vercel.app', "http://localhost:3001", "http://localhost:3002"];
