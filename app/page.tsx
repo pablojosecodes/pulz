@@ -1,10 +1,11 @@
 'use client'
-import {  useSettings } from "@/util/globalSettings";
+import { useSettings } from "@/util/globalSettings";
 import useData from "@/hooks/useData";
 import FuzzySearch from "fuzzy-search";
 
 import Dashboard from "@/components/dashboard";
 import { useEffect, useMemo } from "react";
+import { global_include_local } from "@/util/config";
 
 
 
@@ -28,7 +29,7 @@ export default function Home() {
 	}, [settings.paused]);
 
 	// Data -> Events
-	let { events  = [], urls = [] } = data ?? {};
+	let { events = [], urls = [] } = data ?? {};
 
 	const filteredEvents = useMemo(() => {
 		if (settings.filter && events) {
@@ -36,8 +37,9 @@ export default function Home() {
 				caseSensitive: false,
 				sort: true,
 			});
-			
-			return searcher.search(settings.filter);
+
+			const initialFilter = searcher.search(settings.filter);
+			return initialFilter;
 		}
 
 
