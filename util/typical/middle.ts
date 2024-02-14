@@ -4,6 +4,8 @@ import { global_allowed_origins } from '../config';
 
 export function corsMiddleware(req: NextRequest) {
     const requestOrigin = req.headers.get('origin');
+    console.log("REQ")
+    console.log(requestOrigin)
 	if (!requestOrigin){
 		return false;
 	}
